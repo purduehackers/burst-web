@@ -4,9 +4,10 @@
 
 @layer base {
   @font-face {
-    font-family: 'Nimbus Sans D OT Bold';
+    font-family: "Nimbus Sans D OT Bold";
     font-style: normal;
     font-weight: normal;
-    src: local('Nimbus Sans D OT Bold'), url('Nimbus-Sans-D-OT-Bold_32747.woff') format('woff');
+    src: local("Nimbus Sans D OT Bold"),
+      url("Nimbus-Sans-D-OT-Bold_32747.woff") format("woff");
   }
 }
