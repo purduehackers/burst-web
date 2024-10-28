@@ -36,7 +36,7 @@ export const prerender = true;
 
   <script>
     const canvas = document.getElementById("starCanvas") as HTMLCanvasElement;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -46,7 +46,16 @@ export const prerender = true;
 
     const scale = isMobile ? 1.5 : 3;
 
-    const lines = [];
+    type Line = {
+      originalX: number;
+      originalY: number;
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+    };
+
+    const lines: Line[][] = [];
     const numLines = 8; // Number of lines
     let lineLength = scale * 100; // Length of each line
     const starColor = "#fffceb";
@@ -95,18 +104,21 @@ export const prerender = true;
       }
     }
 
-    function snapToGrid(value, gridSize) {
+    function snapToGrid(value: number, gridSize: number) {
       return Math.round(value / gridSize) * gridSize;
     }
 
     function updatePoints() {
-      const angleStep = (Math.PI * 2) / numLines;
-
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
 
+        if (!line) continue;
+
         for (let j = 0; j < line.length; j++) {
           const point = line[j];
+
+          if (!point) continue;
+
           const dx = point.x - mouseX;
           const dy = point.y - mouseY;
           const distance = Math.sqrt(dx * dx + dy * dy);
