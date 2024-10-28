@@ -1,0 +1,23 @@
+---
+const { href, seo = true, ...props } = Astro.props;
+
+export interface Props {
+  href: string;
+  seo?: boolean;
+  [key: string]: unknown;
+}
+---
+
+<a
+  href={href}
+  {...!seo ? { rel: "noopener", target: "_blank" } : {}}
+  {...props}
+  class:list={[
+    "underline",
+    "decoration-zinc-400",
+    "hover:decoration-foreground",
+    props.class,
+  ]}
+>
+  <slot />
+</a>

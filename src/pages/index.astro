@@ -1,16 +1,172 @@
 ---
+import Layout from "layouts/MainLayout.astro";
 
+export const prerender = true;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="BURST ✷: A showcase of student-made creative technical projects"
+  description="Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on Sunday, December 8th from 2-6pm."
+>
+  <div
+    class="flex flex-col md:flex-row items-center justify-between h-screen mx-2 md:ml-32 my-10 md:my-0"
+  >
+    <div class="flex flex-col justify-center items-start w-full md:w-1/2">
+      <h1
+        class="text-center md:text-left text-[90px] md:text-[200px] md:-mx-3 font-black tracking-widest leading-none w-full"
+      >
+        BURST
+      </h1>
+      <h2
+        class="text-center md:text-left text-xl md:text-3xl font-black tracking-widest leading-none"
+      >
+        a showcase of student-made creative technical projects
+      </h2>
+      <span class="h-8 md:h-32"></span>
+      <p class="text-center md:text-left text-[16px] md:text-2xl leading-none">
+        Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on <br
+          class="hidden md:block"
+        />
+        Sunday, December 8th from 2-6pm.
+      </p>
+    </div>
+
+    <canvas id="starCanvas" class="absolute top-0 left-0 m-0 p-0"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("starCanvas") as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const breakpointMobile = 640;
+    const isMobile = window.innerWidth < breakpointMobile;
+
+    const scale = isMobile ? 1.5 : 3;
+
+    const lines = [];
+    const numLines = 8; // Number of lines
+    let lineLength = scale * 100; // Length of each line
+    const starColor = "#fffceb";
+    const pointSize = scale * 3; // Size of each square point
+    const centerX = isMobile ? canvas.width / 2 : (3 / 4) * canvas.width;
+    const centerY = isMobile ? (5 / 8) * canvas.height : canvas.height / 2;
+    const gridSize = scale * 5; // Size of each grid block
+
+    let initialRotationAngle = Math.PI / 4; //
+    let lineThickness = 5;
+    let lineWidth = 3;
+
+    let mouseX = centerX;
+    let mouseY = centerY;
+
+    function createLines() {
+      const angleStep = (Math.PI * 2) / numLines;
+
+      for (let i = 0; i < numLines; i++) {
+        const angle = i * angleStep + initialRotationAngle;
+
+        for (let offset = -lineWidth / 2; offset <= lineWidth / 2; offset++) {
+          const line = [];
+
+          for (let j = 0; j < lineLength; j += lineThickness) {
+            const x =
+              centerX +
+              Math.cos(angle) * j -
+              Math.sin(angle) * offset * gridSize;
+            const y =
+              centerY +
+              Math.sin(angle) * j +
+              Math.cos(angle) * offset * gridSize;
+
+            line.push({
+              originalX: x,
+              originalY: y,
+              x: x,
+              y: y,
+              vx: 0,
+              vy: 0,
+            });
+          }
+          lines.push(line);
+        }
+      }
+    }
+
+    function snapToGrid(value, gridSize) {
+      return Math.round(value / gridSize) * gridSize;
+    }
+
+    function updatePoints() {
+      const angleStep = (Math.PI * 2) / numLines;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+
+        for (let j = 0; j < line.length; j++) {
+          const point = line[j];
+          const dx = point.x - mouseX;
+          const dy = point.y - mouseY;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          const attractionDistance = 50;
+          let force = 0;
+          if (distance < attractionDistance) {
+            force = (attractionDistance - distance) / attractionDistance;
+          }
+
+          const angleToMouse = Math.atan2(dy, dx);
+          point.vx = (point.vx + Math.cos(angleToMouse) * force * 2) * 0.9;
+          point.vy = (point.vy + Math.sin(angleToMouse) * force * 2) * 0.9;
+
+          // Calculate the return force to the target position
+          const x = point.originalX;
+          const y = point.originalY;
+          const returnDx = x - point.x;
+          const returnDy = y - point.y;
+          const returnDistance = Math.sqrt(
+            returnDx * returnDx + returnDy * returnDy
+          );
+          const returnForce = Math.min(0.1, returnDistance / 100);
+          point.x += point.vx + returnDx * returnForce;
+          point.y += point.vy + returnDy * returnForce;
+        }
+      }
+    }
+
+    function drawLines() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+      ctx.fillStyle = starColor;
+
+      for (const line of lines) {
+        for (const point of line) {
+          // Snap to grid during drawing
+          const snappedX = snapToGrid(point.x, gridSize);
+          const snappedY = snapToGrid(point.y, gridSize);
+          ctx.fillRect(
+            snappedX - pointSize / 2,
+            snappedY - pointSize / 2,
+            pointSize,
+            pointSize
+          );
+        }
+      }
+    }
+
+    canvas.addEventListener("mousemove", (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+    });
+
+    function animate() {
+      updatePoints();
+      drawLines();
+      requestAnimationFrame(animate);
+    }
+
+    createLines();
+    animate();
+  </script>
+</Layout>
