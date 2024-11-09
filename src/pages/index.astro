@@ -125,7 +125,8 @@ export const prerender = true;
           const dy = point.y - mouseY;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          const attractionDistance = 50;
+          // const attractionDistance = 200 / (1 + Math.exp(-(0.1 * (window.innerWidth - 350) / 3.3))) + 30;
+          const attractionDistance = 40 * scale;
           let force = 0;
           if (distance < attractionDistance) {
             force = (attractionDistance - distance) / attractionDistance;
