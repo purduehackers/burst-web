@@ -6,7 +6,9 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Nimbus Sans D OT Bold", ...fonts.sans],
+        nimbus: ["Nimbus Sans D OT Bold", ...fonts.sans],
+        doto: "Doto",
+        mono: '"Roboto Mono"'
       },
       colors: {
         white: "#fffceb",

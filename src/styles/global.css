@@ -10,4 +10,19 @@
     src: local("Nimbus Sans D OT Bold"),
       url("Nimbus-Sans-D-OT-Bold_32747.woff") format("woff");
   }
+  @font-face {
+    font-family: 'Roboto Mono';
+    src: url('RobotoMono.ttf');
+  }
+  @font-face {
+    font-family: 'Doto';
+    src: url('Doto.ttf');
+  }
+}
+
+::selection {
+  background-color: rgb(0, 26, 255);
+  background-color: #ff002f;
+  background-color: rgb(255, 201, 201);
+  color: #E6002A;
 }

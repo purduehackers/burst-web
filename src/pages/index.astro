@@ -2,6 +2,9 @@
 import Layout from "layouts/MainLayout.astro";
 import ProjectList from "components/ProjectList.astro";
 
+import { projects } from "~/utils/projects-data";
+import ProjectCard from "components/ProjectCard.astro";
+
 export const prerender = true;
 ---
 
@@ -10,7 +13,7 @@ export const prerender = true;
   description="Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on Sunday, December 8th from 2-6pm."
 >
   <div
-    class="flex flex-col md:flex-row items-center justify-between h-screen mx-2 md:ml-32 my-10 md:my-0"
+    class="font-nimbus flex flex-col md:flex-row items-center justify-between h-screen mx-2 md:ml-32 my-10 md:my-0"
   >
     <div class="flex flex-col justify-center items-start w-full md:w-1/2">
       <h1
@@ -37,8 +40,17 @@ export const prerender = true;
     <canvas id="starCanvas" class="absolute top-0 left-0 m-0 p-0"></canvas>
   </div>
 
-  <div class="p-12">
+  <div class="hidden p-24">
     <ProjectList />
+  </div>
+
+  <div class="w-full p-24">
+    <h1 class="text-9xl font-doto m-4">Projects</h1>
+    <div class="w-full grid grid-cols-2">
+        {projects.slice(0, projects.length - 1).map((project) => 
+          <ProjectCard project={project} />
+        )}
+    </div>
   </div>
 
   <script>

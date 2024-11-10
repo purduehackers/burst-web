@@ -6,11 +6,11 @@ const { project } = Astro.props;
 {/* JS comment syntax is also valid! */}
 
 <!-- Use props and other variables from the component script: -->
-<a class="w-full flex gap-2 p-2 items-center border-solid border-white border-b-2 hover:bg-white hover:text-red"
+<a class="w-full font-mono flex gap-4 py-2 items-center border-solid border-white border-b-[1px] hover:bg-white hover:text-red"
         href="">
-    <div class="text-xl">{project.title}</div>
+    <div class="font-medium">{project.title}</div>
     <div>{project.creator}</div>
-    ⇥
+    <div class="font-sans">⇥</div>
 </a>
 
 <div class="hidden">{project.description}</div>

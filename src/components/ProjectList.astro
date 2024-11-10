@@ -1,5 +1,5 @@
 ---
-import ProjectItem from "./ProjectItem.astro";
+import ProjectListItem from "./ProjectListItem.astro";
 import { projects } from "~/utils/projects-data";
 ---
 <!-- HTML comments supported! -->
@@ -11,10 +11,10 @@ import { projects } from "~/utils/projects-data";
 <!-- Mix HTML with JavaScript expressions, similar to JSX: -->
 <h1>Projects</h1>
 
-<ul class="flex flex-col gap-0 p-12">
+<ul class="flex flex-col gap-0">
     {projects.map((project) => 
         <div class="flex">
-            <ProjectItem project={project} />
+            <ProjectListItem project={project} />
         </div>
     )}
 </ul>

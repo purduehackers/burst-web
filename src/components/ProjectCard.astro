@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+const { project } = Astro.props;
+---
+<!-- HTML comments supported! -->
+{/* JS comment syntax is also valid! */}
+
+<!-- Use props and other variables from the component script: -->
+<div class="min-w-[300px] h-full min-h-[120px] pt-8 pb-2 flex gap-2 justify-between items-end border-solid border-white border-b-2 hover:bg-white hover:text-red">
+    <div class="flex flex-col justify-end items-start">
+        <div class="text-xl font-mono">{project.title}</div>
+        <div class="text-base uppercase font-light">{project.creator}</div>
+        ⇥
+        <div class="text-sm font-mono font-light">{project.description}</div>
+    </div>
+    {project.photo ?
+        <Image
+            width={200}
+            height={150}
+            src={project.photo}
+            alt={project.photo} />
+    :
+        <div></div>
+    }
+</div>
+
+<!-- Use a template directive to build class names from multiple strings or even objects! -->
+<p class:list={["add", "dynamic", {classNames: true}]} />

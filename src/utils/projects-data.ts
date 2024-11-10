@@ -1,89 +1,81 @@
 export const projects = [
     {
         title: "Passports",
-        creator: "Matthew",
+        creator: "Matthew Stanciu / ",
         creatorLink: "",
-        description: "Official ID of the Republic of Hackerland.",
-        photo: "",
+        description: "NFC-embedded booklets serving as the official ID of the Republic of Hackerland.",
+        photo: "/img/passport.jpg",
         medium: ""
     },
     {
         title: "Badges",
-        creator: "... many people",
+        creator: "Sean Choi / Every single person who has made a badge",
         creatorLink: "",
-        description: "laser cut every hack night, community tokens",
-        photo: "",
+        description: "Custom designed community tokens laser-cut every Hack Night.",
+        photo: "/img/badges.jpg",
         medium: ""
     },
     {
-        title: "Prisha shader",
+        title: "\"Prisha shader\"",
         creator: "Prisha",
         creatorLink: "",
-        description: "Ask for a description",
+        description: "Ask for a description.",
         photo: "",
         medium: ""
     },
     {
         title: "Phone Bell",
-        creator: "Hazel",
+        creator: "Hazel Roeder",
         creatorLink: "",
-        description: "The phone bell is bidirectional; black phone is used to ring the doorbell, which rings the tan phone. Tan phone picks up, it becomes an intercom, dial 0 on the tan phone to trigger the door opener",
-        photo: "",
+        description: "Rotary phone-activated doorbell that doubles as an intercom.",
+        photo: "/img/phone.jpg",
         medium: ""
     },
     {
-        title: "Sign",
-        creator: "Jack",
+        title: "The Sign",
+        creator: "Jack Hogan / Hazel Roeder",
         creatorLink: "",
-        description: "a sign from the heavens",
-        photo: "",
-        medium: ""
-    },
-    {
-        title: "Lightning Time",
-        creator: "...",
-        creatorLink: "",
-        description: "look at blog post",
-        photo: "",
+        description: "Meter-tall Conway glider that lights up according to Lightning Time (hexidecimal Purdue Hackers time unit).",
+        photo: "/img/sign.jpg",
         medium: ""
     },
     {
         title: "ETea",
-        creator: "Jadden, ...",
+        creator: "Jadden / ",
         creatorLink: "",
-        description: "ask for description (look at steam link)",
-        photo: "",
+        description: "Videogame.",
+        photo: "/img/etea.jpg",
         medium: ""
     },
     {
         title: "Vulcan",
         creator: "Lillith",
         creatorLink: "",
-        description: "ask",
+        description: "Server.",
         photo: "",
         medium: ""
     },
     {
         title: "Door opener",
-        creator: "Hazel",
+        creator: "Hazel Roeder",
         creatorLink: "",
-        description: "opens door",
+        description: "Passport-activated door opener.",
         photo: "",
         medium: ""
     },
     {
         title: "Vine Script",
-        creator: "Ayden",
+        creator: "Ayden Bridges",
         creatorLink: "",
-        description: "script of vine",
-        photo: "",
+        description: "script of vine.",
+        photo: "/img/vine.jpg",
         medium: ""
     },
     {
         title: "Something with receipt printers",
-        creator: "Hazel",
+        creator: "Hazel Roeder",
         creatorLink: "",
-        description: "live transcription of people talking (and of phone bell conversations)",
+        description: "Receipt printers printing transcription of live gallery audio.",
         photo: "",
         medium: ""
     },
@@ -91,7 +83,7 @@ export const projects = [
         title: "Kart’s hackertyper packet loss installation",
         creator: "Kart",
         creatorLink: "",
-        description: "I don't know",
+        description: "Kart’s hackertyper packet loss installation",
         photo: "",
         medium: ""
     },
@@ -99,7 +91,7 @@ export const projects = [
         title: "Qter",
         creator: "I don't know",
         creatorLink: "",
-        description: "rubik's cube computer",
+        description: "Rubik's cube computer",
         photo: "",
         medium: ""
     },
