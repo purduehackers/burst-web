@@ -13,9 +13,9 @@ export const prerender = true;
 >
   <div class="flex flex-col min-w-screen font-nimbus">
     <div
-      class="flex flex-col md:flex-row items-center justify-start h-screen mx-2 md:ml-32 my-10 md:my-0"
+      class="flex flex-col md:flex-row items-center justify-start md:h-screen mx-2 md:ml-32 my-10 md:my-0"
     >
-      <div class="flex flex-col justify-center items-start w-full md:w-1/2">
+      <div class="flex flex-col justify-center items-start w-11/12 md:w-1/2">
         <h1
           class="text-center md:text-left text-[90px] md:text-[200px] md:-mx-3 font-black tracking-widest leading-none w-full"
         >
@@ -26,14 +26,14 @@ export const prerender = true;
         >
           a showcase of student-made creative technical projects
         </h2>
-        <p class="mt-16 text-center md:text-left text-[16px] md:text-2xl leading-none">
-          Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on&#32;<br
-            class="hidden md:block"
-          />
-          <time datetime="2024-12-06T14:00:00"
-            >Sunday, December 8th from 2-6pm.</time
-          >
-        </p>
+        <div class="flex flex-col gap-1 mx-auto md:mx-0 mt-6 md:mt-16 text-base md:text-2xl leading-none break-words">
+            <time datetime="2024-12-06T14:00:00">
+                Sunday, December 8th from 2–6pm
+            </time>
+            <p>
+                Patti & Rusty Rueff Galleries (Pao Hall)
+            </p>
+        </div>
       </div>
 
       <canvas
@@ -43,16 +43,24 @@ export const prerender = true;
     </div>
   </div>
 
-  <div class="bg-white text-red">
-    <!-- <div class="flex flex-col items-start gap-y-4 justify-center w-11/12 sm:w-full max-w-6xl mx-auto">
-        <div class="font-mono mt-8 md:mt-24">
-            <h1 class="text-6xl md:text-8xl font-doto">About</h1>
-            <h2>
-                Text description of burst.
-            </h2>
+  <div class="bg-white text-red pb-24">
+    <div class="flex flex-col items-start gap-y-4 justify-center w-11/12 sm:w-full max-w-5xl mx-auto">
+        <div class="font-mono mt-8 md:mt-24 flex flex-col gap-4">
+            <h1 class="text-4xl md:text-8xl font-doto">What is this?</h1>
+            <div class="max-w-3xl flex flex-col gap-4">
+                <p>
+                    BURST ✷ is a 4-hour pop-up gallery exhibition of student projects, run by{' '}<span><a href="https://purduehackers.com" target="_blank" class="underline underline-offset-4 hover:bg-red hover:text-white">Purdue Hackers</a></span>.
+                </p>
+                <p>
+                    For 2 years, folks in Purdue Hackers have been making weird, wacky, and highly impressive technical projects at Hack Night, our Friday night hacker festival—but none of these projects have been seen by anyone outside of Hack Night.
+                </p>
+                <p>
+                    On Sunday, December 8th, we’re putting them in an actual art gallery on campus, on display for the broader Purdue community to see. They’ll only be up for 4 hours, then will never be in the same room again. Blink and you’ll miss it.
+                </p>
+            </div>
         </div>
-    </div> -->
-    <div class="flex flex-col items-start gap-y-4 justify-center w-11/12 sm:w-full max-w-6xl mx-auto">
+    </div>
+    <!-- <div class="flex flex-col items-start gap-y-4 justify-center w-11/12 sm:w-full max-w-6xl mx-auto">
         <div class="font-mono w-full px-24 pt-24 mt-12 border-solid border-white border-t-2">
             <h1 class="text-8xl font-doto mb-4">About</h1>
             <div class="w-ful">
@@ -72,7 +80,7 @@ export const prerender = true;
                 )}
             </div>
         </div>
-    </div>
+    </div> -->
   </div>
 
   <script src="/src/utils/star-canvas" />
