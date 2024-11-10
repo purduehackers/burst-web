@@ -8,7 +8,7 @@ const config = {
       fontFamily: {
         nimbus: ["Nimbus Sans D OT Bold", ...fonts.sans],
         doto: "Doto",
-        mono: '"Roboto Mono"'
+        mono: '"Geist Mono"'
       },
       colors: {
         white: "#fffceb",

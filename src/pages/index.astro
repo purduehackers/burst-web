@@ -44,7 +44,7 @@ export const prerender = true;
   </div>
 
   <div class="bg-white text-red pb-24">
-    <div class="flex flex-col items-start gap-y-4 justify-center w-11/12 sm:w-full max-w-5xl mx-auto">
+    <div class="flex flex-col items-start md:items-center gap-y-4 justify-center w-11/12 sm:w-full max-w-5xl mx-auto">
         <div class="font-mono mt-8 md:mt-24 flex flex-col gap-4">
             <h1 class="text-4xl md:text-8xl font-doto">What is this?</h1>
             <div class="max-w-3xl flex flex-col gap-4">
@@ -55,9 +55,18 @@ export const prerender = true;
                     For 2 years, folks in Purdue Hackers have been making weird, wacky, and highly impressive technical projects at Hack Night, our Friday night hacker festival—but none of these projects have been seen by anyone outside of Hack Night.
                 </p>
                 <p>
-                    On Sunday, December 8th, we’re putting them in an actual art gallery on campus, on display for the broader Purdue community to see. They’ll only be up for 4 hours, then will never be in the same room again. Blink and you’ll miss it.
+                    On Sunday, December 8th, we’re putting them on display in an art gallery on campus for the broader Purdue community to see. They’ll only be up for 4 hours, then will never be in the same room again. Blink and you’ll miss it.
                 </p>
             </div>
+        </div>
+        <div class="w-full flex justify-center my-16 text-4xl">✷</div>
+        <h1 class="text-4xl md:text-8xl font-doto">Featured works</h1>
+        <div class="w-screen md:w-auto grid md:grid-cols-2 grid-cols-1 gap-x-2 max-w-6xl mt-8">
+            {projects.map((project) =>
+            <div>
+                <ProjectCard project={project} />
+            </div>
+            )}
         </div>
     </div>
     <!-- <div class="flex flex-col items-start gap-y-4 justify-center w-11/12 sm:w-full max-w-6xl mx-auto">
