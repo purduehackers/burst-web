@@ -8,45 +8,49 @@ export const prerender = true;
   title="BURST ✷: A showcase of student-made creative technical projects"
   description="Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on Sunday, December 8th from 2-6pm."
 >
-  <div
-    class="flex flex-col md:flex-row items-center justify-between h-screen mx-2 md:ml-32 my-10 md:my-0"
-  >
-    <div class="flex flex-col justify-center items-start w-full md:w-1/2">
-      <h1
-        class="text-center md:text-left text-[90px] md:text-[200px] md:-mx-3 font-black tracking-widest leading-none w-full"
-      >
-        BURST
-      </h1>
-      <h2
-        class="text-center md:text-left text-xl md:text-3xl font-black tracking-widest leading-none"
-      >
-        a showcase of student-made creative technical projects
-      </h2>
-      <span class="h-8 md:h-32"></span>
-      <p class="text-center md:text-left text-[16px] md:text-2xl leading-none">
-        Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on&#32;<br
-          class="hidden md:block"
-        />
-        <time datetime="2024-12-06T14:00:00"
-          >Sunday, December 8th from 2-6pm.</time
+  <div class="flex flex-col min-w-screen">
+    <div
+      class="flex flex-col md:flex-row items-center justify-start h-screen mx-2 md:ml-32 my-10 md:my-0"
+    >
+      <div class="flex flex-col justify-center items-start w-full md:w-1/2">
+        <h1
+          class="text-center md:text-left text-[90px] md:text-[200px] md:-mx-3 font-black tracking-widest leading-none w-full"
         >
-      </p>
-    </div>
+          BURST
+        </h1>
+        <h2
+          class="text-center md:text-left text-xl md:text-3xl font-black tracking-widest leading-none"
+        >
+          a showcase of student-made creative technical projects
+        </h2>
+        <p class="mt-16 text-center md:text-left text-[16px] md:text-2xl leading-none">
+          Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on&#32;<br
+            class="hidden md:block"
+          />
+          <time datetime="2024-12-06T14:00:00"
+            >Sunday, December 8th from 2-6pm.</time
+          >
+        </p>
+      </div>
 
-    <canvas id="starCanvas" class="absolute top-0 left-0 m-0 p-0"></canvas>
+      <canvas
+        id="starCanvas"
+        class="relative xl:ml-8"
+      ></canvas>
+    </div>
   </div>
 
   <script>
     const canvas = document.getElementById("starCanvas") as HTMLCanvasElement;
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
     const breakpointMobile = 640;
     const isMobile = window.innerWidth < breakpointMobile;
 
     const scale = isMobile ? 1.5 : 3;
+    const canvasSize = scale * 220;
+    canvas.width = canvasSize;
+    canvas.height = canvasSize;
 
     type Line = {
       originalX: number;
@@ -61,14 +65,14 @@ export const prerender = true;
     const numLines = 8; // Number of lines
     let lineLength = scale * 100; // Length of each line
     const starColor = "#fffceb";
+    const centerX = Math.round(canvas.width / 2);
+    const centerY = Math.round(canvas.height / 2);
     const pointSize = scale * 3; // Size of each square point
-    const centerX = isMobile ? canvas.width / 2 : (3 / 4) * canvas.width;
-    const centerY = isMobile ? (5 / 8) * canvas.height : canvas.height / 2;
     const gridSize = scale * 5; // Size of each grid block
 
-    let initialRotationAngle = Math.PI / 4; //
-    let lineThickness = 5;
-    let lineWidth = 3;
+    let initialRotationAngle = Math.PI / 4;
+    let lineThickness = 5.5;
+    let lineWidth = lineThickness / 1.67;
 
     let mouseX = -100;
     let mouseY = -100;
@@ -106,8 +110,22 @@ export const prerender = true;
       }
     }
 
+
+
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      // Recalculate positions for the lines
+      lines.length = 0;
+      createLines();
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
     function snapToGrid(value: number, gridSize: number) {
-      return Math.round(value / gridSize) * gridSize;
+      return Math.floor(value / gridSize) * gridSize;
     }
 
     function updatePoints() {
@@ -171,8 +189,12 @@ export const prerender = true;
     }
 
     canvas.addEventListener("mousemove", (event) => {
-      mouseX = event.clientX;
-      mouseY = event.clientY;
+      mouseX = event.offsetX;
+      mouseY = event.offsetY;
+    });
+    canvas.addEventListener("mouseleave", () => {
+      mouseX = -100;
+      mouseY = -100;
     });
 
     // Handle dragging on mobile
@@ -184,8 +206,11 @@ export const prerender = true;
       isDragging = true;
 
       const touch = event.touches[0];
-      touchX = touch?.clientX || touchX;
-      touchY = touch?.clientY || touchY;
+      if (!touch) return;
+
+      const rect = canvas.getBoundingClientRect(); // Get canvas position
+      touchX = touch.clientX - rect.left; // Calculate relative X
+      touchY = touch.clientY - rect.top;  // Calculate relative Y
 
       mouseX = touchX;
       mouseY = touchY;
@@ -194,10 +219,13 @@ export const prerender = true;
     function handleTouchMove(event: TouchEvent) {
       if (!isDragging) return;
 
-      event.preventDefault();
+      event.preventDefault(); // Prevent scrolling during touch move
       const touch = event.touches[0];
-      touchX = touch?.clientX || touchX;
-      touchY = touch?.clientY || touchY;
+      if (!touch) return;
+
+      const rect = canvas.getBoundingClientRect(); // Get canvas position
+      touchX = touch.clientX - rect.left; // Calculate relative X
+      touchY = touch.clientY - rect.top;  // Calculate relative Y
 
       mouseX = touchX;
       mouseY = touchY;
