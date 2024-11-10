@@ -46,7 +46,7 @@ export const prerender = true;
 
   <div class="font-mono w-full px-24 pt-24 mt-12 border-solid border-white border-t-2">
     <h1 class="text-8xl font-doto mb-4">About</h1>
-    <div class="w-full grid grid-cols-2 gap-x-2">
+    <div class="w-full">
         Text description of burst.
     </div>
   </div>
@@ -55,7 +55,7 @@ export const prerender = true;
 
   <div class="w-full p-24 pt-18 border-solid border-white border-t-">
     <h1 class="text-8xl font-doto mb-4">Projects</h1>
-    <div class="w-full grid grid-cols-2 gap-x-2">
+    <div class="w-full grid md:grid-cols-2 grid-cols-1 gap-x-2">
         {projects.slice(0, projects.length - 1).map((project) => 
           <div>
             <ProjectCard project={project} />
