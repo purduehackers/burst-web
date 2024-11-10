@@ -74,12 +74,12 @@ export const projects = [
     photo: "",
     medium: "",
   },
-  {
-    title: "",
-    creator: "",
-    creatorLink: "",
-    description: "",
-    photo: "",
-    medium: "",
-  },
+  // {
+  //   title: "",
+  //   creator: "",
+  //   creatorLink: "",
+  //   description: "",
+  //   photo: "",
+  //   medium: "",
+  // },
 ];
