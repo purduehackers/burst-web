@@ -1,5 +1,6 @@
 ---
 import Layout from "layouts/MainLayout.astro";
+import ProjectList from "components/ProjectList.astro";
 
 export const prerender = true;
 ---
@@ -27,13 +28,17 @@ export const prerender = true;
         Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on&#32;<br
           class="hidden md:block"
         />
-        <time datetime="2024-12-06T14:00:00"
-          >Sunday, December 8th from 2-6pm.</time
-        >
+        <time datetime="2024-12-06T14:00:00">
+          Sunday, December 8th from 2-6pm.
+        </time>
       </p>
     </div>
 
     <canvas id="starCanvas" class="absolute top-0 left-0 m-0 p-0"></canvas>
+  </div>
+
+  <div class="p-12">
+    <ProjectList />
   </div>
 
   <script>

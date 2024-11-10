@@ -1,0 +1,19 @@
+---
+// Your component script here!
+const { project } = Astro.props;
+---
+<!-- HTML comments supported! -->
+{/* JS comment syntax is also valid! */}
+
+<!-- Use props and other variables from the component script: -->
+<a class="w-full flex gap-2 p-2 items-center border-solid border-white border-b-2 hover:bg-white hover:text-red"
+        href="">
+    <div class="text-xl">{project.title}</div>
+    <div>{project.creator}</div>
+    ⇥
+</a>
+
+<div class="hidden">{project.description}</div>
+
+<!-- Use a template directive to build class names from multiple strings or even objects! -->
+<p class:list={["add", "dynamic", {classNames: true}]} />

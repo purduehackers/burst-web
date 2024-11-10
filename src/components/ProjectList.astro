@@ -1,0 +1,23 @@
+---
+import ProjectItem from "./ProjectItem.astro";
+import { projects } from "~/utils/projects-data";
+---
+<!-- HTML comments supported! -->
+{/* JS comment syntax is also valid! */}
+
+<!-- Use a template directive to build class names from multiple strings or even objects! -->
+<p class:list={["add", "dynamic", {classNames: true}]} />
+
+<!-- Mix HTML with JavaScript expressions, similar to JSX: -->
+<h1>Projects</h1>
+
+<ul class="flex flex-col gap-0 p-12">
+    {projects.map((project) => 
+        <div class="flex">
+            <ProjectItem project={project} />
+        </div>
+    )}
+</ul>
+
+<!-- Use a template directive to build class names from multiple strings or even objects! -->
+<p class:list={["add", "dynamic", {classNames: true}]} />

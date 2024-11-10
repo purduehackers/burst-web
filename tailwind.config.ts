@@ -8,6 +8,10 @@ const config = {
       fontFamily: {
         sans: ["Nimbus Sans D OT Bold", ...fonts.sans],
       },
+      colors: {
+        white: "#fffceb",
+        red: "#E6002A"
+      },
     },
   },
   plugins: [],
