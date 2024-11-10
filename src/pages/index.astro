@@ -45,10 +45,12 @@ export const prerender = true;
   </div>
 
   <div class="w-full p-24">
-    <h1 class="text-9xl font-doto m-4">Projects</h1>
-    <div class="w-full grid grid-cols-2">
+    <h1 class="text-9xl font-doto my-4">Projects</h1>
+    <div class="w-full grid grid-cols-2 gap-x-2">
         {projects.slice(0, projects.length - 1).map((project) => 
-          <ProjectCard project={project} />
+          <div>
+            <ProjectCard project={project} />
+          </div>
         )}
     </div>
   </div>

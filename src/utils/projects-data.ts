@@ -9,10 +9,10 @@ export const projects = [
     },
     {
         title: "Badges",
-        creator: "Sean Choi / Every single person who has made a badge",
+        creator: "Sean Choi / Every single other person who has made a badge",
         creatorLink: "",
         description: "Custom designed community tokens laser-cut every Hack Night.",
-        photo: "/img/badges.jpg",
+        photo: "",
         medium: ""
     },
     {
