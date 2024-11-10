@@ -8,22 +8,6 @@ export const projects = [
         medium: ""
     },
     {
-        title: "Badges",
-        creator: "Sean Choi / Every single other person who has made a badge",
-        creatorLink: "",
-        description: "Custom designed community tokens laser-cut every Hack Night.",
-        photo: "",
-        medium: ""
-    },
-    {
-        title: "\"Prisha shader\"",
-        creator: "Prisha",
-        creatorLink: "",
-        description: "Ask for a description.",
-        photo: "",
-        medium: ""
-    },
-    {
         title: "Phone Bell",
         creator: "Hazel Roeder",
         creatorLink: "",
@@ -48,6 +32,30 @@ export const projects = [
         medium: ""
     },
     {
+        title: "Vine Script",
+        creator: "Ayden Bridges",
+        creatorLink: "",
+        description: "script of vine.",
+        photo: "/img/vine.jpg",
+        medium: ""
+    },
+    {
+        title: "Badges",
+        creator: "Sean Choi / Every single other person who has made a badge",
+        creatorLink: "",
+        description: "Custom designed community tokens laser-cut every Hack Night.",
+        photo: "",
+        medium: ""
+    },
+    {
+        title: "\"Prisha shader\"",
+        creator: "Prisha",
+        creatorLink: "",
+        description: "Ask for a description.",
+        photo: "",
+        medium: ""
+    },
+    {
         title: "Vulcan",
         creator: "Lillith",
         creatorLink: "",
@@ -61,14 +69,6 @@ export const projects = [
         creatorLink: "",
         description: "Passport-activated door opener.",
         photo: "",
-        medium: ""
-    },
-    {
-        title: "Vine Script",
-        creator: "Ayden Bridges",
-        creatorLink: "",
-        description: "script of vine.",
-        photo: "/img/vine.jpg",
         medium: ""
     },
     {
