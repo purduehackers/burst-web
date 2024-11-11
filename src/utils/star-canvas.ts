@@ -81,7 +81,7 @@ function snapToGrid(value: number, gridSize: number) {
 
 // Keep track of last mouse movement
 let lastMouseMoveTime = Date.now();
-const debounceTime = 2200;
+const debounceTime = 4200;
 let isMouseActive = true;
 let mouseInCanvas = false;
 
