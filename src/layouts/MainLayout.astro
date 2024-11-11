@@ -38,7 +38,7 @@ export interface Props {
     <link rel="manifest" href="/manifest.json" />
 
     <meta name="apple-mobile-web-app-title" content="BURST" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="#E6002A" />
 
     <meta name="theme-color" content="#E6002A" />
@@ -56,7 +56,7 @@ export interface Props {
         basic: {
           type: "website",
           title: og && og.title ? og.title : title,
-          image: `${import.meta.env.SITE}/opengraph.png`,
+          image: `/opengraph.png`,
         },
         optional: {
           description: og && og.description ? og.description : description,
@@ -73,7 +73,7 @@ export interface Props {
         title: twitter && twitter.title ? twitter.title : title,
         description:
           twitter && twitter.description ? twitter.description : description,
-        image: `${import.meta.env.SITE}/opengraph.png`,
+        image: `/opengraph.png`,
         // TODO: add alt text
         // imageAlt: "",
         card: "summary_large_image",
@@ -91,7 +91,7 @@ export interface Props {
     <ViewTransitions />
   </Head>
   <body
-    class="flex flex-col bg-[#E6002A] text-[#fffceb] w-full max-w-full min-h-screen overflow-x-clip"
+    class="flex flex-col bg-red text-white w-full max-w-full min-h-screen overflow-x-clip"
   >
     <slot />
   </body>

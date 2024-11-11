@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+const { project } = Astro.props;
+---
+
+<div class="h-full p-4 md:p-2 flex lg:flex-row md:flex-col sm:flex-row flex-col gap-2 justify-between items-start border-solid
+    [&:nth-child(odd)]:bg-red [&:nth-child(odd)]:text-white
+    md:bg-white md:text-red
+    [&:nth-child(odd)]:md:bg-white [&:nth-child(odd)]:md:text-red
+    [&:nth-child(odd)]:md:hover:bg-red [&:nth-child(odd)]:md:hover:text-white
+    [&:nth-child(even)]:md:hover:bg-red [&:nth-child(even)]:md:hover:text-white">
+    <div class="flex flex-col justify-start items-start">
+        <div class="text-3xl font-mono font-semibold">{project.title}</div>
+        <div class="text-base uppercase font-light">{project.creator}</div>
+        ⇥
+        <div class="text-sm font-mono font-light">{project.description}</div>
+    </div>
+    {project.photo ?
+        <Image
+            width={250}
+            height={187}
+            src={project.photo}
+            alt={project.photo}
+        />
+    :
+    <div class="min-w-[250px] max-w-[250px] h-[187px] hidden md:block" />
+    }
+</div>

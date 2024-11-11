@@ -6,7 +6,13 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Nimbus Sans D OT Bold", ...fonts.sans],
+        nimbus: ["Nimbus Sans D OT Bold", ...fonts.sans],
+        doto: "Doto",
+        mono: '"Geist Mono"'
+      },
+      colors: {
+        white: "#fffceb",
+        red: "#E6002A"
       },
     },
   },

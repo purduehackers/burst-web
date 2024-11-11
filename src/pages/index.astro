@@ -1,6 +1,11 @@
 ---
 import Layout from "layouts/MainLayout.astro";
 
+import { projects } from "~/utils/projects-data";
+import ProjectCard from "components/ProjectCard.astro";
+
+import { EmailForm } from "../components/EmailForm";
+
 export const prerender = true;
 ---
 
@@ -8,246 +13,120 @@ export const prerender = true;
   title="BURST ✷: A showcase of student-made creative technical projects"
   description="Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on Sunday, December 8th from 2-6pm."
 >
-  <div class="flex flex-col min-w-screen">
+  <div class="flex flex-col min-w-screen font-mono">
     <div
-      class="flex flex-col md:flex-row items-center justify-start h-screen mx-2 md:ml-32 my-10 md:my-0"
+      class="flex flex-col md:flex-row items-center justify-start md:h-screen mx-2 md:ml-32 my-10 md:my-0"
     >
-      <div class="flex flex-col justify-center items-start w-full md:w-1/2">
+      <div class="flex flex-col justify-center items-start w-11/12 md:w-1/2">
         <h1
-          class="text-center md:text-left text-[90px] md:text-[200px] md:-mx-3 font-black tracking-widest leading-none w-full"
+          class="font-nimbus text-center md:text-left text-[90px] md:text-[200px] md:-mx-3 font-black tracking-widest leading-none w-full"
         >
           BURST
         </h1>
         <h2
-          class="text-center md:text-left text-xl md:text-3xl font-black tracking-widest leading-none"
+          class="text-center md:text-left text-lg md:text-2xl font-semibold tracking-wider leading-none"
         >
           a showcase of student-made creative technical projects
         </h2>
-        <p class="mt-16 text-center md:text-left text-[16px] md:text-2xl leading-none">
-          Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on&#32;<br
-            class="hidden md:block"
-          />
-          <time datetime="2024-12-06T14:00:00"
-            >Sunday, December 8th from 2-6pm.</time
+        <div
+          class="hidden md:flex md:flex-col gap-1 mx-auto md:mx-0 mt-6 text-base md:text-xl leading-none break-words"
+        >
+          <div class="flex flex-row items-center gap-2">
+            <img src="/calendar.svg" class="w-5 md:w-6 pointer-events-none" />
+            <time datetime="2024-12-06T14:00:00">
+              Sunday, December 8th, 2–6pm
+            </time>
+          </div>
+          <div class="flex flex-row items-center gap-2">
+            <img src="/map-pin.svg" class="w-5 md:w-6 pointer-events-none" />
+            <p>Patti & Rusty Rueff Galleries</p>
+          </div>
+        </div>
+        <div class="hidden md:flex md:flex-col md:mx-0 md:mt-6 md:gap-1">
+          <EmailForm client:load />
+          <a
+            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=BURST✷&details=BURST+✷+is+a+4-hour+pop-up+gallery+exhibition+of+creative+technical+projects,+run+by+Purdue+Hackers.+Join+us+at+the+Rueff+Galleries+in+Pao+Hall.&location=Patti+and+Rusty+Rueff+School+of+Visual+and+Performing+Arts,+Pao+(Yue-Kong)+Hall+of+Visual+and+Performing+Arts,+552+W+Wood+St,+West+Lafayette,+IN+47907,+USA&ctz=America/Indianapolis&dates=20241208T190000Z/20241208T230000Z"
+            target="_blank"
+            class="text-center font-mono bg-white py-2 sm:px-2 font-bold hover:scale-105 transform transition
+          disabled:opacity-50 disabled:hover:scale-100 text-black"
           >
-        </p>
+            Add to Google Calendar
+          </a>
+        </div>
       </div>
-
-      <canvas
-        id="starCanvas"
-        class="relative xl:ml-8"
-      ></canvas>
+      <div class="flex flex-col-reverse">
+        <div class="flex flex-col-reverse gap-8 md:hidden">
+          <EmailForm client:load />
+          <a
+            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=BURST✷&details=BURST+✷+is+a+4-hour+pop-up+gallery+exhibition+of+creative+technical+projects,+run+by+Purdue+Hackers.+Join+us+at+the+Rueff+Galleries+in+Pao+Hall.&location=Patti+and+Rusty+Rueff+School+of+Visual+and+Performing+Arts,+Pao+(Yue-Kong)+Hall+of+Visual+and+Performing+Arts,+552+W+Wood+St,+West+Lafayette,+IN+47907,+USA&ctz=America/Indianapolis&dates=20241208T190000Z/20241208T230000Z"
+            target="_blank"
+            class="mt-5 text-center font-mono bg-white py-2 sm:px-2 font-bold hover:scale-105 transform transition
+          disabled:opacity-50 disabled:hover:scale-100 text-black"
+          >
+            Add to Google Calendar
+          </a>
+        </div>
+        <div
+          class="md:hidden flex flex-col gap-1 mx-auto text-base leading-none break-words"
+        >
+          <div class="flex flex-row items-center gap-2">
+            <img src="/calendar.svg" class="w-5 md:w-6 pointer-events-none" />
+            <time datetime="2024-12-06T14:00:00">
+              Sunday, December 8th, 2–6pm
+            </time>
+          </div>
+          <div class="flex flex-row items-center gap-2">
+            <img src="/map-pin.svg" class="w-5 md:w-6 pointer-events-none" />
+            <p>Patti & Rusty Rueff Galleries</p>
+          </div>
+        </div>
+        <canvas id="starCanvas" class="relative xl:ml-8"></canvas>
+      </div>
     </div>
   </div>
 
-  <script>
-    const canvas = document.getElementById("starCanvas") as HTMLCanvasElement;
-    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-
-    const breakpointMobile = 640;
-    const isMobile = window.innerWidth < breakpointMobile;
-
-    const scale = isMobile ? 1.5 : 3;
-    const canvasSize = scale * 220;
-    canvas.width = canvasSize;
-    canvas.height = canvasSize;
-
-    type Line = {
-      originalX: number;
-      originalY: number;
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-    };
-
-    const lines: Line[][] = [];
-    const numLines = 8; // Number of lines
-    let lineLength = scale * 100; // Length of each line
-    const starColor = "#fffceb";
-    const centerX = Math.round(canvas.width / 2);
-    const centerY = Math.round(canvas.height / 2);
-    const pointSize = scale * 3; // Size of each square point
-    const gridSize = scale * 5; // Size of each grid block
-
-    let initialRotationAngle = Math.PI / 4;
-    let lineThickness = 5.5;
-    let lineWidth = lineThickness / 1.67;
-
-    let mouseX = -100;
-    let mouseY = -100;
-
-    function createLines() {
-      const angleStep = (Math.PI * 2) / numLines;
-
-      for (let i = 0; i < numLines; i++) {
-        const angle = i * angleStep + initialRotationAngle;
-
-        for (let offset = -lineWidth / 2; offset <= lineWidth / 2; offset++) {
-          const line = [];
-
-          for (let j = 0; j < lineLength; j += lineThickness) {
-            const x =
-              centerX +
-              Math.cos(angle) * j -
-              Math.sin(angle) * offset * gridSize;
-            const y =
-              centerY +
-              Math.sin(angle) * j +
-              Math.cos(angle) * offset * gridSize;
-
-            line.push({
-              originalX: x,
-              originalY: y,
-              x: x,
-              y: y,
-              vx: 0,
-              vy: 0,
-            });
-          }
-          lines.push(line);
-        }
-      }
-    }
-
-
-
-    function resizeCanvas() {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-
-      // Recalculate positions for the lines
-      lines.length = 0;
-      createLines();
-    }
-
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-
-    function snapToGrid(value: number, gridSize: number) {
-      return Math.floor(value / gridSize) * gridSize;
-    }
-
-    function updatePoints() {
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-
-        if (!line) continue;
-
-        for (let j = 0; j < line.length; j++) {
-          const point = line[j];
-
-          if (!point) continue;
-
-          const dx = point.x - mouseX;
-          const dy = point.y - mouseY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          // const attractionDistance = 200 / (1 + Math.exp(-(0.1 * (window.innerWidth - 350) / 3.3))) + 30;
-          const attractionDistance = 40 * scale;
-          let force = 0;
-          if (distance < attractionDistance) {
-            force = (attractionDistance - distance) / attractionDistance;
-          }
-
-          const angleToMouse = Math.atan2(dy, dx);
-          point.vx = (point.vx + Math.cos(angleToMouse) * force * 2) * 0.9;
-          point.vy = (point.vy + Math.sin(angleToMouse) * force * 2) * 0.9;
-
-          // Calculate the return force to the target position
-          const x = point.originalX;
-          const y = point.originalY;
-          const returnDx = x - point.x;
-          const returnDy = y - point.y;
-          const returnDistance = Math.sqrt(
-            returnDx * returnDx + returnDy * returnDy
-          );
-          const returnForce = Math.min(0.1, returnDistance / 100);
-          point.x += point.vx + returnDx * returnForce;
-          point.y += point.vy + returnDy * returnForce;
-        }
-      }
-    }
-
-    function drawLines() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
-      ctx.fillStyle = starColor;
-
-      for (const line of lines) {
-        for (const point of line) {
-          // Snap to grid during drawing
-          const snappedX = snapToGrid(point.x, gridSize);
-          const snappedY = snapToGrid(point.y, gridSize);
-          ctx.fillRect(
-            snappedX - pointSize / 2,
-            snappedY - pointSize / 2,
-            pointSize,
-            pointSize
-          );
-        }
-      }
-    }
-
-    canvas.addEventListener("mousemove", (event) => {
-      mouseX = event.offsetX;
-      mouseY = event.offsetY;
-    });
-    canvas.addEventListener("mouseleave", () => {
-      mouseX = -100;
-      mouseY = -100;
-    });
-
-    // Handle dragging on mobile
-    let isDragging = false;
-    let touchX = -100;
-    let touchY = -100;
-
-    function handleTouchStart(event: TouchEvent) {
-      isDragging = true;
-
-      const touch = event.touches[0];
-      if (!touch) return;
-
-      const rect = canvas.getBoundingClientRect(); // Get canvas position
-      touchX = touch.clientX - rect.left; // Calculate relative X
-      touchY = touch.clientY - rect.top;  // Calculate relative Y
-
-      mouseX = touchX;
-      mouseY = touchY;
-    }
-
-    function handleTouchMove(event: TouchEvent) {
-      if (!isDragging) return;
-
-      event.preventDefault(); // Prevent scrolling during touch move
-      const touch = event.touches[0];
-      if (!touch) return;
-
-      const rect = canvas.getBoundingClientRect(); // Get canvas position
-      touchX = touch.clientX - rect.left; // Calculate relative X
-      touchY = touch.clientY - rect.top;  // Calculate relative Y
-
-      mouseX = touchX;
-      mouseY = touchY;
-    }
-
-    function handleTouchEnd() {
-      isDragging = false;
-      mouseX = -100;
-      mouseY = -100;
-    }
-
-    canvas.addEventListener("touchstart", handleTouchStart);
-    canvas.addEventListener("touchmove", handleTouchMove);
-    canvas.addEventListener("touchend", handleTouchEnd);
-
-    function animate() {
-      updatePoints();
-      drawLines();
-      requestAnimationFrame(animate);
-    }
-
-    createLines();
-    animate();
-  </script>
+  <div class="bg-white text-red">
+    <div
+      class="flex flex-col items-start md:items-center gap-y-4 justify-center w-11/12 sm:w-full max-w-5xl mx-auto"
+    >
+      <div class="font-mono mt-8 md:mt-24 flex flex-col gap-4">
+        <h1 class="text-4xl md:text-8xl font-doto">WHAT IS THIS?</h1>
+        <div class="max-w-3xl flex flex-col gap-4">
+          <p>
+            BURST ✷ is a 4-hour pop-up gallery exhibition of creative technical
+            projects, run by{" "}<span
+              ><a
+                href="https://purduehackers.com"
+                target="_blank"
+                class="underline underline-offset-4 hover:bg-red hover:text-white"
+                >Purdue Hackers</a
+              ></span
+            >.
+          </p>
+          <p>
+            For 2 years, students in Purdue Hackers have been developing wacky,
+            cutting-edge projects at Hack Night, our all-night hacker festival
+            every Friday—but none have been seen by anyone outside Hack Night.
+          </p>
+          <p>
+            On Sunday, December 8th, we’re installing these creations in the
+            Rueff Galleries on campus in a first-of-its-kind exhibition for the
+            broader campus community. They’ll only be up for 4 hours, then never
+            all in the same room again. Blink and you’ll miss it.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+    <h1 class="text-4xl md:text-8xl font-doto w-11/12 mx-auto md:text-center">
+      FEATURED WORKS
+    </h1>
+    <div
+      class="grid md:grid-cols-2 grid-cols-1 gap-x-2 mt-8 md:w-11/12 lg:max-w-6xl mx-auto"
+    >
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+  </div>
+  <script src="/src/utils/star-canvas"></script>
 </Layout>

@@ -5,9 +5,37 @@
 @layer base {
   @font-face {
     font-family: "Nimbus Sans D OT Bold";
-    font-style: normal;
-    font-weight: normal;
-    src: local("Nimbus Sans D OT Bold"),
-      url("Nimbus-Sans-D-OT-Bold_32747.woff") format("woff");
+    font-weight: bold;
+    src: url("/fonts/Nimbus-Sans-D-OT-Bold_32747.woff") format("woff");
   }
+  @font-face {
+    font-family: "Geist Mono";
+    src: url("/fonts/GeistMono-Regular.ttf");
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: "Geist Mono";
+    src: url("/fonts/GeistMono-SemiBold.ttf");
+    font-weight: 600;
+  }
+  @font-face {
+    font-family: "Geist Mono";
+    src: url("/fonts/GeistMono-Bold.ttf");
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: "Doto";
+    src: url("/fonts/Doto.ttf");
+  }
+
+  p {
+      text-wrap: pretty;
+  }
+}
+
+::selection {
+  background-color: rgb(0, 26, 255);
+  background-color: #ff002f;
+  background-color: rgb(255, 201, 201);
+  color: #e6002a;
 }
