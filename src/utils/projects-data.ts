@@ -4,14 +4,14 @@ export const projects = [
     creator: "Community",
     creatorLink: "",
     description:
-      "NFC-embedded booklets serving as the official ID of the Republic of Hackerland.",
+      "Handmade, faux-leather–bound booklets with embedded NFC chips. Official IDs for the Republic of Hackerland.",
     photo: "/img/passport.jpg",
   },
   {
     title: "Phone Bell",
     creator: "Hazel Roeder",
     creatorLink: "",
-    description: "A rotary phone–activated doorbell that doubles as an intercom.",
+    description: "A rotary phone that rings the doorbell to Hack Night by calling a second phone inside.",
     photo: "/img/phone.jpg",
   },
   {
@@ -19,7 +19,7 @@ export const projects = [
     creator: "Jack Hogan",
     creatorLink: "",
     description:
-      "A meter-tall Conway glider that lights up according to a color representation of the current time.",
+      "A meter-tall Conway glider that lights up according to the color representation of the current time.",
     photo: "/img/sign.jpg",
   },
   {
@@ -33,21 +33,21 @@ export const projects = [
     title: "Vine Script",
     creator: "Ayden Bridges",
     creatorLink: "",
-    description: "A spoken language with a script consisting of vines with leaves & berries.",
+    description: "A spoken language with a writing system consisting of vines with leaves & berries.",
     photo: "/img/vine.jpg",
   },
   {
     title: "Door Opener",
     creator: "Hazel Roeder",
     creatorLink: "",
-    description: "A device that opens a locked door given a valid passport.",
+    description: "A device that reads NFC data from a scanned passport & opens the door to Hack Night.",
     photo: "/img/door-opener.png",
   },
   {
     title: "Badges",
     creator: "Community",
     creatorLink: "",
-    description: "Laser-cut collectibles made for Hack Night every week for the past two years.",
+    description: "Colorful, laser-cut collectibles made & distributed at Hack Night every week.",
     photo: "/img/all-badges.jpg",
   },
   {
@@ -55,14 +55,14 @@ export const projects = [
     creator: "Hazel Roeder",
     creatorLink: "",
     description:
-      "A receipt printer that continuously prints data from the other installations.",
+      "A receipt printer that continuously prints data from the other installations onto an increasingly large pile on the floor.",
     photo: "",
   },
   {
     title: "keymashd",
     creator: "Systems Circle",
     creatorLink: "",
-    description: "A livestream whose packets are controlled by a typing test.",
+    description: "A livestream whose packets are controlled by a typing test. The slower you type, the more packets get dropped.",
     photo: "",
   },
 ];
