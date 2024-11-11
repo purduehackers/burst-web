@@ -9,7 +9,7 @@ const canvasSize = scale * 220;
 canvas.width = canvasSize;
 canvas.height = canvasSize;
 
-type Line = {
+type Point = {
   originalX: number;
   originalY: number;
   x: number;
@@ -18,7 +18,7 @@ type Line = {
   vy: number;
 };
 
-const lines: Line[][] = [];
+const lines: Point[][] = [];
 const numLines = 8; // Number of lines
 let lineLength = scale * 100; // Length of each line
 const starColor = "#fffceb";
@@ -41,7 +41,7 @@ function createLines() {
     const angle = i * angleStep + initialRotationAngle;
 
     for (let offset = -lineWidth / 2; offset <= lineWidth / 2; offset++) {
-      const line = [];
+      const line: Point[] = [];
 
       for (let j = 0; j < lineLength; j += lineThickness) {
         const x =
@@ -79,7 +79,20 @@ function snapToGrid(value: number, gridSize: number) {
   return Math.floor(value / gridSize) * gridSize;
 }
 
+// Keep track of last mouse movement
+let lastMouseMoveTime = Date.now();
+const debounceTime = 1000;
+let isMouseActive = true;
+
+// Auto-anim frame
+let autoAnimPhase = 0; 
+
 function updatePoints() {
+  const now = Date.now();
+  
+  //console.log(now - lastMouseMoveTime);
+  isMouseActive = now - lastMouseMoveTime < debounceTime;
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
@@ -90,33 +103,49 @@ function updatePoints() {
 
       if (!point) continue;
 
-      const dx = point.x - mouseX;
-      const dy = point.y - mouseY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (isMouseActive) {
+        // Adjust movement based on mouse if active
+        const dx = point.x - mouseX;
+        const dy = point.y - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-      // const attractionDistance = 200 / (1 + Math.exp(-(0.1 * (window.innerWidth - 350) / 3.3))) + 30;
-      const attractionDistance = 40 * scale;
-      let force = 0;
-      if (distance < attractionDistance) {
-        force = (attractionDistance - distance) / attractionDistance;
+        // const attractionDistance = 200 / (1 + Math.exp(-(0.1 * (window.innerWidth - 350) / 3.3))) + 30;
+        const attractionDistance = 40 * scale;
+        let force = 0;
+        if (distance < attractionDistance) {
+          force = (attractionDistance - distance) / attractionDistance;
+        }
+
+        const angleToMouse = Math.atan2(dy, dx);
+        point.vx = (point.vx + Math.cos(angleToMouse) * force * 2) * 0.9;
+        point.vy = (point.vy + Math.sin(angleToMouse) * force * 2) * 0.9;
+
+        // Calculate the return force to the target position
+        const x = point.originalX;
+        const y = point.originalY;
+        const returnDx = x - point.x;
+        const returnDy = y - point.y;
+        const returnDistance = Math.sqrt(
+          returnDx * returnDx + returnDy * returnDy
+        );
+        const returnForce = Math.min(0.1, returnDistance / 100);
+        point.x += point.vx + returnDx * returnForce;
+        point.y += point.vy + returnDy * returnForce;
+      } else {
+        // Auto-animation
+        // Radius for circular anim
+        const radius = 100 * scale;
+
+        // Animate points in a circular pattern
+        point.x = point.originalX + Math.cos(autoAnimPhase + j * 0.5) * radius;
+        point.y = point.originalY + Math.sin(autoAnimPhase + j * 0.5) * radius;
       }
-
-      const angleToMouse = Math.atan2(dy, dx);
-      point.vx = (point.vx + Math.cos(angleToMouse) * force * 2) * 0.9;
-      point.vy = (point.vy + Math.sin(angleToMouse) * force * 2) * 0.9;
-
-      // Calculate the return force to the target position
-      const x = point.originalX;
-      const y = point.originalY;
-      const returnDx = x - point.x;
-      const returnDy = y - point.y;
-      const returnDistance = Math.sqrt(
-        returnDx * returnDx + returnDy * returnDy
-      );
-      const returnForce = Math.min(0.1, returnDistance / 100);
-      point.x += point.vx + returnDx * returnForce;
-      point.y += point.vy + returnDy * returnForce;
     }
+  }
+
+  // Update auto-anim phase for the next frame
+  if (!isMouseActive) {
+    autoAnimPhase += 0.02;
   }
 }
 
@@ -142,10 +171,14 @@ function drawLines() {
 canvas.addEventListener("mousemove", (event) => {
   mouseX = event.offsetX;
   mouseY = event.offsetY;
+  // Reset debounce timer when mouse moves
+  lastMouseMoveTime = Date.now(); 
 });
 canvas.addEventListener("mouseleave", () => {
   mouseX = -100;
   mouseY = -100;
+  // Reset debounce timer when mouse leaves
+  //lastMouseMoveTime = Date.now();
 });
 
 // Handle dragging on mobile
