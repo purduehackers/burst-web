@@ -43,12 +43,12 @@ export function EmailForm() {
           value={email}
           placeholder="Enter your email"
           onChange={(e) => setEmail(e.target.value)}
-          className="font-mono border-none rounded-none outline-none bg-white px-2 w-full h-10 md:h-auto md:w-52 text-black"
+          className="font-mono border-none rounded-none outline-none bg-white px-2 w-full h-10 md:w-72 md:h-auto text-black"
         ></input>
         <button
           type="submit"
           className="font-mono bg-white py-2 sm:px-2 font-bold hover:scale-105 transform transition
-        disabled:opacity-50 disabled:hover:scale-100 text-black"
+        disabled:opacity-50 disabled:hover:scale-100 text-black md:w-40 text-center"
           disabled={email.length === 0}
         >
           {submitting ? '•••' : 'Get a reminder'}
@@ -64,7 +64,7 @@ export function EmailForm() {
         <p role="status" className="text-sm">
           ✉️ 🚀 Thanks! You’re on the list.
         </p>
-      ) : <p className="invisible">.</p>
+      ) : null
       }
     </div>
   )
