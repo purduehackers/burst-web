@@ -5,8 +5,7 @@
 @layer base {
   @font-face {
     font-family: "Nimbus Sans D OT Bold";
-    font-style: normal;
-    font-weight: normal;
+    font-weight: bold;
     src: url("/fonts/Nimbus-Sans-D-OT-Bold_32747.woff") format("woff");
   }
   @font-face {
@@ -31,6 +30,10 @@
   @font-face {
     font-family: "Doto";
     src: url("/fonts/Doto.ttf");
+  }
+
+  p {
+      text-wrap: pretty;
   }
 }
 

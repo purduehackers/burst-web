@@ -26,7 +26,7 @@ export const prerender = true;
         >
           a showcase of student-made creative technical projects
         </h2>
-        <div class="flex flex-col gap-1 mx-auto md:mx-0 mt-6 md:mt-16 text-base md:text-2xl leading-none break-words">
+        <div class="flex flex-col gap-1 mx-auto md:mx-0 mt-6 md:mt-16 text-base md:text-2xl leading-none break-words text-center md:text-left">
             <time datetime="2024-12-06T14:00:00">
                 Sunday, December 8th from 2–6pm
             </time>
@@ -59,15 +59,13 @@ export const prerender = true;
                 </p>
             </div>
         </div>
-        <div class="w-full flex justify-center my-16 text-4xl">✷</div>
-        <h1 class="text-4xl md:text-8xl font-doto">Featured works</h1>
-        <div class="grid md:grid-cols-2 grid-cols-1 gap-x-2 max-w-6xl mt-8">
-            {projects.map((project) =>
-            <div>
-                <ProjectCard project={project} />
-            </div>
-            )}
-        </div>
+    </div>
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+    <h1 class="text-4xl md:text-8xl font-doto w-11/12 mx-auto md:text-center">Featured works</h1>
+    <div class="grid md:grid-cols-2 grid-cols-1 gap-x-2 mt-8 md:w-11/12 lg:max-w-6xl mx-auto">
+        {projects.map((project) =>
+            <ProjectCard project={project} />
+        )}
     </div>
     <!-- <div class="flex flex-col items-start gap-y-4 justify-center w-11/12 sm:w-full max-w-6xl mx-auto">
         <div class="font-mono w-full px-24 pt-24 mt-12 border-solid border-white border-t-2">
