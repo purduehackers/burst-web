@@ -9,10 +9,6 @@
     src: url("/fonts/Nimbus-Sans-D-OT-Bold_32747.woff") format("woff");
   }
   @font-face {
-    font-family: "Roboto Mono";
-    src: url("/fonts/RobotoMono.ttf");
-  }
-  @font-face {
     font-family: "Geist Mono";
     src: url("/fonts/GeistMono-Regular.ttf");
     font-weight: 400;
