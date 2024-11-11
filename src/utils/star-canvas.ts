@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 const breakpointMobile = 640;
 const isMobile = window.innerWidth < breakpointMobile;
 
-const scale = isMobile ? 1.5 : 2.65;
+const scale = isMobile ? 1.5 : 3;
 const canvasSize = scale * 220;
 canvas.width = canvasSize;
 canvas.height = canvasSize;
