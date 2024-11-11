@@ -4,6 +4,8 @@ import Layout from "layouts/MainLayout.astro";
 import { projects } from "~/utils/projects-data";
 import ProjectCard from "components/ProjectCard.astro";
 
+import { EmailForm } from "../components/EmailForm"
+
 export const prerender = true;
 ---
 
@@ -26,7 +28,7 @@ export const prerender = true;
         >
           a showcase of student-made creative technical projects
         </h2>
-        <div class="flex flex-col gap-1 mx-auto md:mx-0 mt-6 md:mt-16 text-base md:text-2xl leading-none break-words text-center md:text-left">
+        <div class="flex flex-col gap-1 mx-auto md:mx-0 mt-6 text-base md:text-2xl leading-none break-words text-center md:text-left">
             <time datetime="2024-12-06T14:00:00">
                 Sunday, December 8th from 2–6pm
             </time>
@@ -34,16 +36,23 @@ export const prerender = true;
                 Patti & Rusty Rueff Galleries (Pao Hall)
             </p>
         </div>
+        <div class="hidden md:flex md:flex-col md:mx-0 md:mt-6">
+            <EmailForm client:load />
+        </div>
       </div>
-
-      <canvas
-        id="starCanvas"
-        class="relative xl:ml-8"
-      ></canvas>
+      <div class="flex flex-col-reverse">
+        <div class="flex flex-col md:hidden">
+            <EmailForm client:load />
+        </div>
+        <canvas
+            id="starCanvas"
+            class="relative xl:ml-8"
+        ></canvas>
+      </div>
     </div>
   </div>
 
-  <div class="bg-white text-red pb-24">
+  <div class="bg-white text-red">
     <div class="flex flex-col items-start md:items-center gap-y-4 justify-center w-11/12 sm:w-full max-w-5xl mx-auto">
         <div class="font-mono mt-8 md:mt-24 flex flex-col gap-4">
             <h1 class="text-4xl md:text-8xl font-doto">What is this?</h1>
@@ -67,7 +76,7 @@ export const prerender = true;
             <ProjectCard project={project} />
         )}
     </div>
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
   </div>
-
   <script src="/src/utils/star-canvas" />
 </Layout>
