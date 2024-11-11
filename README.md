@@ -1,5 +1,7 @@
 # BURST ✷
 
+<img width="1484" alt="opengraph" src="https://github.com/user-attachments/assets/ba440eab-3cf9-4f16-9bf5-9e4d81781a3c">
+
 BURST ✷ is a 4-hour pop-up gallery exhibition of creative technical projects, run by Purdue Hackers.
 
 For 2 years, students in Purdue Hackers have been developing wacky, cutting-edge projects at Hack Night, our all-night hacker festival every Friday—but none have been seen by anyone outside Hack Night.
