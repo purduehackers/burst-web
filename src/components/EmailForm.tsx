@@ -40,7 +40,7 @@ export function EmailForm() {
           value={email}
           placeholder="Enter your email"
           onChange={(e) => setEmail(e.target.value)}
-          className="font-mono border-none rounded-none outline-none bg-white px-2 h-10 md:w-72 md:h-auto text-black"
+          className="w-full font-mono border-none rounded-none outline-none bg-white px-2 h-10 md:w-72 md:h-auto text-black"
         ></input>
         <button
           type="submit"
