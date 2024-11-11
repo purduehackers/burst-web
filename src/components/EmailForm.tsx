@@ -29,9 +29,6 @@ export function EmailForm() {
 
   return (
     <div className="flex flex-col items-left">
-      {/* <p className="text-xl md:text-2xl">
-        Get a reminder
-      </p> */}
       <form
         onSubmit={onSubmit}
         className="flex flex-col sm:flex-row items-left gap-y-2 sm:gap-x-2 mb-1"
