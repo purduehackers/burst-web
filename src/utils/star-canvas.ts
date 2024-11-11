@@ -94,7 +94,6 @@ let radius = 1 * scale;
 function updatePoints() {
   const now = Date.now();
 
-  //console.log(now - lastMouseMoveTime);
   isMouseActive = now - lastMouseMoveTime < debounceTime;
 
   for (let i = 0; i < lines.length; i++) {
