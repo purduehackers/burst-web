@@ -5,7 +5,7 @@ const breakpointMobile = 640;
 const isMobile = window.innerWidth < breakpointMobile;
 
 const scale = isMobile ? 1.5 : 3;
-const canvasSize = scale * 220;
+const canvasSize = scale * 300;
 canvas.width = canvasSize;
 canvas.height = canvasSize;
 
@@ -82,7 +82,7 @@ function snapToGrid(value: number, gridSize: number) {
 // Keep track of last mouse movement
 let lastMouseMoveTime = Date.now();
 const debounceTime = 5500;
-let isMouseActive = true;
+let mouseActive = true;
 let mouseInCanvas = false;
 
 // Auto-anim frame
@@ -91,10 +91,11 @@ let autoAnimPhase = 0;
 // Radius for circular anim
 let radius = 1 * scale;
 
+// Update location of each indivdual point
 function updatePoints() {
   const now = Date.now();
 
-  isMouseActive = now - lastMouseMoveTime < debounceTime;
+  mouseActive = (now - lastMouseMoveTime) < debounceTime;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -106,7 +107,7 @@ function updatePoints() {
 
       if (!point) continue;
 
-      if (isMouseActive || mouseInCanvas) {
+      if (mouseActive || mouseInCanvas) {
         // Adjust movement based on mouse if active
         const dx = point.x - mouseX;
         const dy = point.y - mouseY;
@@ -144,7 +145,7 @@ function updatePoints() {
   }
 
   // Update auto-anim phase for the next frame
-  if (!isMouseActive && (!mouseInCanvas || !isDragging)) {
+  if (!mouseActive && (!mouseInCanvas || !isDragging)) {
     autoAnimPhase += 0.02;
     if (radius < 95) {
       radius *= 1.01;
@@ -156,6 +157,7 @@ function updatePoints() {
   }
 }
 
+// Redraw lines on canvas
 function drawLines() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
   ctx.fillStyle = starColor;
@@ -178,14 +180,16 @@ function drawLines() {
 canvas.addEventListener("mousemove", (event) => {
   mouseX = event.offsetX;
   mouseY = event.offsetY;
-  // Reset debounce timer when mouse moves
+
+  // Reset debounce timer for auto-anim
   lastMouseMoveTime = Date.now();
   mouseInCanvas = true;
 });
 canvas.addEventListener("mouseleave", () => {
   mouseX = -100;
   mouseY = -100;
-  // Reset debounce timer when mouse leaves
+
+  // Reset debounce timer for auto-anim
   lastMouseMoveTime = Date.now();
   mouseInCanvas = false;
 });
@@ -237,6 +241,7 @@ canvas.addEventListener("touchstart", handleTouchStart);
 canvas.addEventListener("touchmove", handleTouchMove);
 canvas.addEventListener("touchend", handleTouchEnd);
 
+// Update point locations and redraw lines every frame
 function animate() {
   updatePoints();
   drawLines();
