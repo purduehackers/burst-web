@@ -4,10 +4,8 @@ const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 const breakpointMobile = 640;
 const isMobile = window.innerWidth < breakpointMobile;
 
-const scale = isMobile ? 1.5 : 2.65;
-const canvasSize = scale * 220;
-/*const scale = isMobile ? 1.5 : 3;
-const canvasSize = scale * 300;*/
+const scale = isMobile ? 1.5 : 3;
+const canvasSize = scale * 300;
 canvas.width = canvasSize;
 canvas.height = canvasSize;
 
@@ -16,6 +14,8 @@ type Point = {
   originalY: number;
   x: number;
   y: number;
+  lastX: number;
+  lastY: number;
   vx: number;
   vy: number;
 };
@@ -56,6 +56,8 @@ function createLines() {
           originalY: y,
           x: x,
           y: y,
+          lastX: x, // previous X value
+          lastY: y, // previous Y value
           vx: 0,
           vy: 0,
         });
@@ -83,12 +85,13 @@ function snapToGrid(value: number, gridSize: number) {
 
 // Keep track of last mouse movement
 let lastMouseMoveTime = Date.now();
-const debounceTime = 5500;
+const debounceTime = 1000;//5500;
 let mouseActive = true;
 let mouseInCanvas = false;
 
 // Auto-anim frame
 let autoAnimPhase = 0;
+let autoAnimStep = 0.02;
 
 // Radius for circular anim
 let radius = 1 * scale;
@@ -109,7 +112,7 @@ function updatePoints() {
 
       if (!point) continue;
 
-      if (mouseActive || mouseInCanvas) {
+      if (mouseActive/* || mouseInCanvas*/) {
         // Adjust movement based on mouse if active
         const dx = point.x - mouseX;
         const dy = point.y - mouseY;
@@ -137,21 +140,24 @@ function updatePoints() {
         const returnForce = Math.min(0.1, returnDistance / 100);
         point.x += point.vx + returnDx * returnForce;
         point.y += point.vy + returnDy * returnForce;
+
+        point.lastX = point.x;
+        point.lastY = point.y;
+
+        /*lastX = point.x;
+        lastY = point.y;*/
       } else {
-        // Auto-animation
-        // Animate points in a circular pattern
-        point.x = point.originalX + Math.cos(autoAnimPhase + j * 0.5) * radius;
-        point.y = point.originalY + Math.sin(autoAnimPhase + j * 0.5) * radius;
+        // Auto-animate points in a circular pattern
+        point.x = point.lastX + Math.cos(autoAnimPhase + j * 0.5) * radius;
+        point.y = point.lastY + Math.sin(autoAnimPhase + j * 0.5) * radius;
       }
     }
   }
 
   // Update auto-anim phase for the next frame
-  if (!mouseActive && (!mouseInCanvas || !isDragging)) {
-    autoAnimPhase += 0.02;
-    if (radius < 95) {
-      radius *= 1.01;
-    }
+  if (!mouseActive && (/*!mouseInCanvas ||*/ !isDragging)) {
+    autoAnimPhase += autoAnimStep;
+    radius = (radius < 95) ? radius * 1.01 : 95;
   } else {
     // Reset
     autoAnimPhase = 0;
