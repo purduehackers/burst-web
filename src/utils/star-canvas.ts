@@ -85,9 +85,8 @@ function snapToGrid(value: number, gridSize: number) {
 
 // Keep track of last mouse movement
 let lastMouseMoveTime = Date.now();
-const debounceTime = 1000;//5500;
+const debounceTime = 5500;
 let mouseActive = true;
-let mouseInCanvas = false;
 
 // Auto-anim frame
 let autoAnimPhase = 0;
@@ -112,7 +111,7 @@ function updatePoints() {
 
       if (!point) continue;
 
-      if (mouseActive/* || mouseInCanvas*/) {
+      if (mouseActive) {
         // Adjust movement based on mouse if active
         const dx = point.x - mouseX;
         const dy = point.y - mouseY;
@@ -155,7 +154,7 @@ function updatePoints() {
   }
 
   // Update auto-anim phase for the next frame
-  if (!mouseActive && (/*!mouseInCanvas ||*/ !isDragging)) {
+  if (!mouseActive && !isDragging) {
     autoAnimPhase += autoAnimStep;
     radius = (radius < 95) ? radius * 1.01 : 95;
   } else {
@@ -191,7 +190,6 @@ canvas.addEventListener("mousemove", (event) => {
 
   // Reset debounce timer for auto-anim
   lastMouseMoveTime = Date.now();
-  mouseInCanvas = true;
 });
 canvas.addEventListener("mouseleave", () => {
   mouseX = -100;
@@ -199,7 +197,6 @@ canvas.addEventListener("mouseleave", () => {
 
   // Reset debounce timer for auto-anim
   lastMouseMoveTime = Date.now();
-  mouseInCanvas = false;
 });
 
 // Handle dragging on mobile
