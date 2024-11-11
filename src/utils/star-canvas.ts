@@ -5,7 +5,7 @@ const breakpointMobile = 640;
 const isMobile = window.innerWidth < breakpointMobile;
 
 const scale = isMobile ? 1.5 : 3;
-const canvasSize = scale * 300;
+const canvasSize = scale * 280;
 canvas.width = canvasSize;
 canvas.height = canvasSize;
 
