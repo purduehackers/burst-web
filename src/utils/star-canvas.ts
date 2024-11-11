@@ -86,14 +86,14 @@ let isMouseActive = true;
 let mouseInCanvas = false;
 
 // Auto-anim frame
-let autoAnimPhase = 0; 
+let autoAnimPhase = 0;
 
 // Radius for circular anim
 let radius = 1 * scale;
 
 function updatePoints() {
   const now = Date.now();
-  
+
   //console.log(now - lastMouseMoveTime);
   isMouseActive = now - lastMouseMoveTime < debounceTime;
 
@@ -145,7 +145,7 @@ function updatePoints() {
   }
 
   // Update auto-anim phase for the next frame
-  if (!isMouseActive && !mouseInCanvas) {
+  if (!isMouseActive && (!mouseInCanvas || !isDragging)) {
     autoAnimPhase += 0.02;
     if (radius < 95) {
       radius *= 1.01;
@@ -180,7 +180,7 @@ canvas.addEventListener("mousemove", (event) => {
   mouseX = event.offsetX;
   mouseY = event.offsetY;
   // Reset debounce timer when mouse moves
-  lastMouseMoveTime = Date.now(); 
+  lastMouseMoveTime = Date.now();
   mouseInCanvas = true;
 });
 canvas.addEventListener("mouseleave", () => {
@@ -197,6 +197,7 @@ let touchX = -100;
 let touchY = -100;
 
 function handleTouchStart(event: TouchEvent) {
+  lastMouseMoveTime = Date.now();
   isDragging = true;
 
   const touch = event.touches[0];
@@ -212,6 +213,7 @@ function handleTouchStart(event: TouchEvent) {
 
 function handleTouchMove(event: TouchEvent) {
   if (!isDragging) return;
+  lastMouseMoveTime = Date.now();
 
   event.preventDefault(); // Prevent scrolling during touch move
   const touch = event.touches[0];
@@ -229,6 +231,7 @@ function handleTouchEnd() {
   isDragging = false;
   mouseX = -100;
   mouseY = -100;
+  lastMouseMoveTime = Date.now();
 }
 
 canvas.addEventListener("touchstart", handleTouchStart);
