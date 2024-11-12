@@ -3,13 +3,14 @@ const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
 const breakpointMobile = 768;
 const isMobile = window.innerWidth < breakpointMobile;
+const isPhone = window.innerWidth < 450;
 
 const prefersReducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
 
 const scale = isMobile ? 1.5 : 3;
-const canvasSize = scale * (isMobile ? 260 : 280);
-canvas.width = isMobile && window.innerWidth > canvasSize ? window.innerWidth : canvasSize;
-canvas.height = canvasSize;
+const canvasSize = scale * (isMobile ? 220 : 280);
+canvas.width = isPhone ? window.innerWidth : canvasSize
+canvas.height = isPhone ? window.innerWidth : canvasSize
 
 type Point = {
   originalX: number;
@@ -29,7 +30,7 @@ const starColor = "#fffceb";
 const centerX = Math.round(canvas.width / 2);
 const centerY = Math.round(canvas.height / 2);
 const pointSize = scale * 3; // Size of each square point
-const gridSize = scale * 5; // Size of each grid block
+const gridSize = scale * (isMobile ? 5.25 : 5); // Size of each grid block
 
 let initialRotationAngle = Math.PI / 4;
 let lineThickness = 5.5;
