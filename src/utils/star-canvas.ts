@@ -1,6 +1,7 @@
 const canvas = document.getElementById("starCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
+const dpr = window.devicePixelRatio;
 const breakpointMobile = 768;
 const isMobile = window.innerWidth < breakpointMobile;
 const isPhone = window.innerWidth < 450;
@@ -29,7 +30,7 @@ let lineLength = scale * 100; // Length of each line
 const starColor = "#fffceb";
 const centerX = Math.round(canvas.width / 2);
 const centerY = Math.round(canvas.height / 2);
-const pointSize = scale * 3; // Size of each square point
+const pointSize = scale * (dpr === 1 ? 3 : 3.25); // Size of each square point
 const gridSize = scale * (isMobile ? 5.25 : 5); // Size of each grid block
 
 let initialRotationAngle = Math.PI / 4;
@@ -71,8 +72,13 @@ function createLines() {
 }
 
 function resizeCanvas() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+  canvas.style.width = `${canvas.offsetWidth}px`;
+  canvas.style.height = `${canvas.offsetHeight}px`;
+
+  canvas.width = canvas.offsetWidth * dpr;
+  canvas.height = canvas.offsetHeight * dpr;
+
+  ctx.scale(dpr, dpr);
 
   // Recalculate positions for the lines
   lines.length = 0;
