@@ -19,7 +19,7 @@ export const projects = [
     creator: "Jack Hogan",
     creatorLink: "",
     description:
-      "A meter-tall Conway glider that lights up according to the color representation of the current time.",
+      "A meter-tall Conway glider that lights up according to a color representation of the current time.",
     photo: "/img/sign.jpg",
   },
   {
