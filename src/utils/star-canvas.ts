@@ -6,6 +6,7 @@ const isMobile = window.innerWidth < breakpointMobile;
 const isPhone = window.innerWidth < 450;
 
 const prefersReducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
+const dpr = window.devicePixelRatio || 1;
 
 const scale = isMobile ? 1.5 : 3;
 const canvasSize = scale * 280;
@@ -29,7 +30,7 @@ let lineLength = scale * 100; // Length of each line
 const starColor = "#fffceb";
 const centerX = Math.round(canvas.width / 2);
 const centerY = Math.round(canvas.height / 2);
-const pointSize = scale * 3.25; // Size of each square point
+const pointSize = scale * (dpr === 1 ? 3 : 3.25); // Size of each square point
 const gridSize = scale * (isMobile ? 5.25 : 5); // Size of each grid block
 
 let initialRotationAngle = Math.PI / 4;
@@ -71,7 +72,6 @@ function createLines() {
 }
 
 function resizeCanvas() {
-  const dpr = window.devicePixelRatio || 1;
   canvas.style.width = `${canvas.offsetWidth}px`;
   canvas.style.height = `${canvas.offsetHeight}px`;
 
