@@ -29,7 +29,7 @@ let lineLength = scale * 100; // Length of each line
 const starColor = "#fffceb";
 const centerX = Math.round(canvas.width / 2);
 const centerY = Math.round(canvas.height / 2);
-const pointSize = scale * 3; // Size of each square point
+const pointSize = scale * 3.25; // Size of each square point
 const gridSize = scale * (isMobile ? 5.25 : 5); // Size of each grid block
 
 let initialRotationAngle = Math.PI / 4;
@@ -71,8 +71,14 @@ function createLines() {
 }
 
 function resizeCanvas() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.style.width = `${canvas.offsetWidth}px`;
+  canvas.style.height = `${canvas.offsetHeight}px`;
+
+  canvas.width = canvas.offsetWidth * dpr;
+  canvas.height = canvas.offsetHeight * dpr;
+
+  ctx.scale(dpr, dpr);
 
   // Recalculate positions for the lines
   lines.length = 0;
@@ -88,7 +94,7 @@ function snapToGrid(value: number, gridSize: number) {
 
 // Keep track of last mouse movement
 let lastMouseMoveTime = Date.now();
-const debounceTime = 5500;
+const debounceTime = 555500;
 let mouseActive = true;
 
 // Auto-anim frame
