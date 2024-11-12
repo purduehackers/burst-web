@@ -1,12 +1,12 @@
 const canvas = document.getElementById("starCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-const breakpointMobile = 640;
+const breakpointMobile = 768;
 const isMobile = window.innerWidth < breakpointMobile;
 
 const scale = isMobile ? 1.5 : 3;
-const canvasSize = scale * 280;
-canvas.width = isMobile ? window.innerWidth : canvasSize;
+const canvasSize = scale * (isMobile ? 260 : 280);
+canvas.width = isMobile && window.innerWidth > canvasSize ? window.innerWidth : canvasSize;
 canvas.height = canvasSize;
 
 type Point = {
