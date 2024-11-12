@@ -8,7 +8,7 @@ const isPhone = window.innerWidth < 450;
 const prefersReducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
 
 const scale = isMobile ? 1.5 : 3;
-const canvasSize = scale * (isMobile ? 220 : 280);
+const canvasSize = scale * 280;
 canvas.width = isPhone ? window.innerWidth : canvasSize
 canvas.height = isPhone ? window.innerWidth : canvasSize
 
