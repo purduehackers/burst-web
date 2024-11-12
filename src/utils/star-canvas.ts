@@ -4,6 +4,8 @@ const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 const breakpointMobile = 768;
 const isMobile = window.innerWidth < breakpointMobile;
 
+const prefersReducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
+
 const scale = isMobile ? 1.5 : 3;
 const canvasSize = scale * (isMobile ? 260 : 280);
 canvas.width = isMobile && window.innerWidth > canvasSize ? window.innerWidth : canvasSize;
@@ -146,15 +148,17 @@ function updatePoints() {
         /*lastX = point.x;
         lastY = point.y;*/
       } else {
-        // Auto-animate points in a circular pattern
-        point.x = point.lastX + Math.cos(autoAnimPhase + j * 0.5) * radius;
-        point.y = point.lastY + Math.sin(autoAnimPhase + j * 0.5) * radius;
+        if (!prefersReducedMotion) {
+          // Auto-animate points in a circular pattern
+          point.x = point.lastX + Math.cos(autoAnimPhase + j * 0.5) * radius;
+          point.y = point.lastY + Math.sin(autoAnimPhase + j * 0.5) * radius;
+        }
       }
     }
   }
 
   // Update auto-anim phase for the next frame
-  if (!mouseActive && !isDragging) {
+  if (!mouseActive && !isDragging && !prefersReducedMotion) {
     autoAnimPhase += autoAnimStep;
     radius = (radius < 95) ? radius * 1.01 : 95;
   } else {
