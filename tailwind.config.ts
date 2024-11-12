@@ -14,6 +14,9 @@ const config = {
         white: "#fffceb",
         red: "#E6002A"
       },
+      screens: {
+        'tall': { 'raw': '(min-width: 1024px) and (min-height: 700px)' }
+      }
     },
   },
   plugins: [],
