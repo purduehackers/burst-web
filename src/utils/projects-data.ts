@@ -26,7 +26,7 @@ export const projects = [
     title: "ETea",
     creator: "Jadden Piccardal, Saahil Aneja",
     creatorLink: "",
-    description: "A video game about an alien bobarista.",
+    description: "A video game following the journey of an alien bobarista far from home.",
     photo: "/img/etea.jpg",
   },
   {

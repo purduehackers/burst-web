@@ -31,7 +31,7 @@ export function EmailForm() {
     <div className="flex flex-col items-left">
       <form
         onSubmit={onSubmit}
-        className="flex flex-col sm:flex-row items-left gap-y-2 sm:gap-x-2 mb-1"
+        className="flex flex-col md:flex-row items-left gap-y-2 sm:gap-x-2 mb-1"
       >
         <input
           type="email"
@@ -40,11 +40,11 @@ export function EmailForm() {
           value={email}
           placeholder="Enter your email"
           onChange={(e) => setEmail(e.target.value)}
-          className="font-mono border-none rounded-none outline-none bg-white px-2 w-full h-10 md:w-72 md:h-auto text-black"
+          className="w-full font-mono border-none rounded-none outline-none bg-white px-2 h-10 md:w-72 md:h-auto text-black"
         ></input>
         <button
           type="submit"
-          className="font-mono bg-white py-2 sm:px-2 font-bold hover:scale-105 transform transition
+          className="min-w-fit font-mono bg-white py-2 sm:px-2 font-bold hover:scale-105 transform transition
         disabled:opacity-50 disabled:hover:scale-100 text-black md:w-40 text-center"
           disabled={email.length === 0}
         >
