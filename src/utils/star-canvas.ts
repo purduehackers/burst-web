@@ -6,7 +6,7 @@ const isMobile = window.innerWidth < breakpointMobile;
 const isPhone = window.innerWidth < 450;
 
 const prefersReducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
-const dpr = window.devicePixelRatio || 1;
+const dpr = window.devicePixelRatio;
 
 const scale = isMobile ? 1.5 : 3;
 const canvasSize = scale * 280;
