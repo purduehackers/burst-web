@@ -6,7 +6,7 @@ const isMobile = window.innerWidth < breakpointMobile;
 
 const scale = isMobile ? 1.5 : 3;
 const canvasSize = scale * 280;
-canvas.width = canvasSize;
+canvas.width = isMobile ? window.innerWidth : canvasSize;
 canvas.height = canvasSize;
 
 type Point = {
