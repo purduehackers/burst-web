@@ -51,7 +51,7 @@ export const projects = [
     photo: "/img/all-badges.jpg",
   },
   {
-    title: "Receipt Printer",
+    title: "Awestruck Printer",
     creator: "Hazel Roeder",
     creatorLink: "",
     description:
