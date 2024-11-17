@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import Analytics from "@vercel/analytics/astro";
 
 import "styles/global.css";
 
@@ -94,5 +95,6 @@ export interface Props {
     class="flex flex-col bg-red text-white w-full max-w-full min-h-screen overflow-x-clip"
   >
     <slot />
+    <Analytics />
   </body>
 </html>
