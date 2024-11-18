@@ -60,7 +60,7 @@ export const projects = [
   },
   {
     title: "keymashd",
-    creator: "Systems Circle",
+    creator: "Kartavya Vashishtha",
     creatorLink: "",
     description: "A livestream whose packets are controlled by a typing test. The slower you type, the more packets get dropped.",
     photo: "",
