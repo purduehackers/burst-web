@@ -24,7 +24,7 @@ export const projects = [
   },
   {
     title: "ETea",
-    creator: "Jadden Picardal, Saahil Aneja, Alicia Zhou, Mason Graves"
+    creator: "Jadden Picardal, Saahil Aneja, Alicia Zhou, Mason Graves",
     creatorLink: "",
     description: "A video game following the journey of an alien bobarista far from home.",
     photo: "/img/etea.jpg",
