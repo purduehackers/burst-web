@@ -28,10 +28,10 @@ export function EmailForm() {
   }
 
   return (
-    <div className="flex flex-col items-left">
+    <div className="flex flex-col items-left mt-5 md:mt-0">
       <form
         onSubmit={onSubmit}
-        className="flex flex-col md:flex-row items-left gap-y-2 sm:gap-x-2 mb-1"
+        className="flex flex-col md:flex-row items-left gap-y-2 sm:gap-x-2 mt-1"
       >
         <input
           type="email"
