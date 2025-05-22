@@ -1,0 +1,129 @@
+---
+import Layout from "layouts/MainLayout.astro";
+
+import { Image } from "astro:assets";
+import { recapProjects } from "~/utils/projects-data";
+import ProjectCard from "components/ProjectCard.astro";
+
+const recapImages = await Astro.glob('/recap-images/*.{jpg,png,jpeg}');
+
+recapImages.sort((a, b) => {
+  const aName = a.default.src.split('/').pop();
+  const bName = b.default.src.split('/').pop();
+  return aName.localeCompare(bName);
+});
+
+export const prerender = true;
+---
+
+<Layout
+  title="BURST ✷: A showcase of student-made creative technical projects"
+  description="A demo day in an art gallery which ran on Sunday, December 8th."
+>
+  <div class="flex flex-col min-w-screen font-mono">
+    <div
+      class="flex flex-col md:flex-row items-center justify-start md:min-h-[92vh] tall:h-[90vh] mx-2 xl:ml-32 lg:ml-20 md:ml-16 mt-10 md:my-0"
+    >
+      <div class="flex flex-col justify-center items-start w-11/12 md:w-1/2">
+        <h1
+          class="font-nimbus text-center md:text-left text-[90px] md:text-[200px] md:-mx-3 font-black tracking-widest leading-none w-full"
+        >
+          BURST
+        </h1>
+        <h2
+          class="spaced text-left text-balance ml-3 md:ml-0 text-xl md:text-2xl font-semibold tracking-wider leading-7 md:leading-2"
+        >
+          was a pop-up gallery exhibition of student-made creative technical
+          projects, which ran on december 8th, 2024
+        </h2>
+      </div>
+      <canvas
+        id="starCanvas"
+        class="relative xl:-ml-[58px] lg:-ml-[50px] md:-ml-[40px] sm:left-0 left-0"
+      ></canvas>
+    </div>
+  </div>
+
+  <div class="bg-white text-red">
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+    <div
+      class="flex flex-col items-start md:items-center gap-y-4 justify-center w-11/12 sm:w-full max-w-5xl mx-auto sm:px-12"
+    >
+      <div class="font-mono flex flex-col gap-4">
+        <div class="max-w-3xl flex flex-col gap-4">
+          <p>
+            <span>
+              <a
+                href="https://purduehackers.com"
+                target="_blank"
+                class="underline underline-offset-4 hover:bg-red hover:text-white"
+                >Purdue Hackers</a>
+            </span
+            > is a collective of engineers & artists at Purdue who build creative
+            technical projects—apps, websites, games, hardware electronics.
+          </p>
+          <p>
+            For 2 years, hackers had been developing wacky, cutting-edge
+            projects at{" "}<span
+              ><a
+                href="https://events.purduehackers.com/hack-night-53"
+                target="_blank"
+                class="underline underline-offset-4 hover:bg-red hover:text-white"
+                >Hack&nbsp;Night</a
+              ></span
+            >, our all-night hacker festival every Friday—but none had been seen
+            by anyone outside Hack Night.
+          </p>
+          <p>
+            On Sunday, December 8th, 2024, we reimagined these projects as art
+            pieces, installed them in a real gallery in West Lafayette, Indiana,
+            and ran a 4-hour pop-up exhibition for the public.
+          </p>
+          <p>
+            250 people stopped by, grabbed a{" "}<span
+              ><a
+                href="https://blog.purduehackers.com/posts/the-best-badge"
+                target="_blank"
+                class="underline underline-offset-4 hover:bg-red hover:text-white"
+                >badge</a
+              ></span
+            > and a mocktail, and viewed this student work, which included NFC-enabled
+            passports, a vine-based constructed language, and a meter-tall color
+            clock.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+    <h1
+      class="text-4xl md:text-6xl lg:text-7xl font-doto w-11/12 mx-auto sm:text-center"
+    >
+      FEATURED WORKS
+    </h1>
+    <div class="grid gap-x-2 mt-8 md:w-11/12 lg:max-w-6xl mx-auto gap-8 sm:gap-0">
+      {recapProjects.map((project) => <ProjectCard project={project} />)}
+    </div>
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+    <div class="w-full overflow-hidden">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-0">
+        {recapImages.map((imageModule) => (
+          <div class="w-full h-full">
+            <Image
+              src={imageModule.default}
+              alt="BURST event photo"
+              width={800}
+              height={600}
+              class="w-full h-full object-cover block pointer-events-none select-none"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="w-full flex justify-center mt-6">
+      <a href="https://drive.google.com/drive/folders/1G-i7CHLLMjMnGWK8lWlWlEmuW2TTFF-P?usp=sharing" target="_blank" class="font-mono underline underline-offset-4 hover:bg-red hover:text-white uppercase font-semibold hover:no-underline text-xl">View all photos</a>
+    </div>
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+    <script src="/src/utils/star-canvas"></script>
+  </div>
+</Layout>
