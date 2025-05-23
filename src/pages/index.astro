@@ -1,21 +1,28 @@
 ---
 import Layout from "layouts/MainLayout.astro";
 
-import { projects } from "~/utils/projects-data";
+import { Image } from "astro:assets";
+import { recapProjects } from "~/utils/projects-data";
 import ProjectCard from "components/ProjectCard.astro";
 
-import { EmailForm } from "../components/EmailForm";
+const recapImages = await Astro.glob("/recap-images/*.{jpg,png,jpeg}");
+
+recapImages.sort((a, b) => {
+  const aName = a.default.src.split("/").pop();
+  const bName = b.default.src.split("/").pop();
+  return aName.localeCompare(bName);
+});
 
 export const prerender = true;
 ---
 
 <Layout
-  title="BURST ✷: A showcase of student-made creative technical projects"
-  description="Join us at the Patti & Rusty Rueff Galleries (in Pao Hall) on Sunday, December 8th from 2-6pm."
+  title="BURST ✷: showcase of student-made creative technical projects"
+  description="A demo day in an art gallery which ran on Sunday, December 8th."
 >
   <div class="flex flex-col min-w-screen font-mono">
     <div
-      class="flex flex-col md:flex-row items-center justify-start md:min-h-[92vh] tall:h-[90vh] mx-2 xl:ml-32 lg:ml-20 md:ml-16 my-10 md:my-0"
+      class="flex flex-col md:flex-row items-center justify-start md:min-h-[92vh] tall:h-[90vh] mx-2 xl:ml-32 lg:ml-20 md:ml-16 mt-10 md:my-0"
     >
       <div class="flex flex-col justify-center items-start w-11/12 md:w-1/2">
         <h1
@@ -24,110 +31,108 @@ export const prerender = true;
           BURST
         </h1>
         <h2
-          class="text-center md:text-left text-lg md:text-2xl font-semibold tracking-wider leading-none"
+          class="spaced text-left text-balance ml-3 md:ml-0 text-xl md:text-2xl font-semibold tracking-wider leading-7 md:leading-2"
         >
-          a showcase of student-made creative technical projects
+          was a pop-up gallery exhibition of student-made creative technical
+          projects, which ran on december 8th, 2024
         </h2>
-        <div
-          class="hidden md:flex md:flex-col gap-1 mx-auto md:mx-0 mt-6 text-base md:text-xl leading-none break-words"
-        >
-          <div class="flex flex-row items-center gap-2">
-            <img src="/calendar.svg" class="w-5 md:w-6 pointer-events-none" />
-            <time datetime="2024-12-06T14:00:00">
-              Sunday, December 8th, 2–6pm
-            </time>
-          </div>
-          <div class="flex flex-row items-center gap-2">
-            <img src="/map-pin.svg" class="w-5 md:w-6 pointer-events-none" />
-            <p>Patti & Rusty Rueff Galleries</p>
-          </div>
-        </div>
-        <div class="lg:w-fit md:w-[90%] min-w-[320px] hidden md:flex md:flex-col md:mx-0 md:mt-6 md:gap-1">
-        <a
-          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=BURST✷&details=BURST+✷+is+a+4-hour+pop-up+gallery+exhibition+of+creative+technical+projects,+run+by+Purdue+Hackers.+Join+us+at+the+Rueff+Galleries+in+Pao+Hall.&location=Patti+and+Rusty+Rueff+School+of+Visual+and+Performing+Arts,+Pao+(Yue-Kong)+Hall+of+Visual+and+Performing+Arts,+552+W+Wood+St,+West+Lafayette,+IN+47907,+USA&ctz=America/Indianapolis&dates=20241208T190000Z/20241208T230000Z"
-          target="_blank"
-          class="text-center font-mono bg-white py-2 sm:px-2 font-bold hover:scale-105 transform transition
-        disabled:opacity-50 disabled:hover:scale-100 text-black"
-        >
-          Add to Google Calendar
-        </a>
-          <EmailForm client:load />
-        </div>
       </div>
-      <div class="flex flex-col-reverse">
-        <div class="flex flex-col-reverse gap-8 w-11/12 mx-auto md:hidden">
-        <a
-          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=BURST✷&details=BURST+✷+is+a+4-hour+pop-up+gallery+exhibition+of+creative+technical+projects,+run+by+Purdue+Hackers.+Join+us+at+the+Rueff+Galleries+in+Pao+Hall.&location=Patti+and+Rusty+Rueff+School+of+Visual+and+Performing+Arts,+Pao+(Yue-Kong)+Hall+of+Visual+and+Performing+Arts,+552+W+Wood+St,+West+Lafayette,+IN+47907,+USA&ctz=America/Indianapolis&dates=20241208T190000Z/20241208T230000Z"
-          target="_blank"
-          class="text-center font-mono bg-white py-2 sm:px-2 font-bold hover:scale-105 transform transition
-        disabled:opacity-50 disabled:hover:scale-100 text-black"
-        >
-          Add to Google Calendar
-        </a>
-          <EmailForm client:load />
-        </div>
-        <div
-          class="md:hidden flex flex-col gap-1 mx-auto text-base leading-none break-words"
-        >
-          <div class="flex flex-row items-center gap-2">
-            <img src="/calendar.svg" class="w-5 md:w-6 pointer-events-none" />
-            <time datetime="2024-12-06T14:00:00">
-              Sunday, December 8th, 2–6pm
-            </time>
-          </div>
-          <div class="flex flex-row items-center gap-2">
-            <img src="/map-pin.svg" class="w-5 md:w-6 pointer-events-none" />
-            <p>Patti & Rusty Rueff Galleries</p>
-          </div>
-        </div>
-        <canvas id="starCanvas" class="relative xl:-ml-[58px] lg:-ml-[50px] md:-ml-[40px] sm:left-0 left-0"></canvas>
-      </div>
+      <canvas
+        id="starCanvas"
+        class="relative xl:-ml-[58px] lg:-ml-[50px] md:-ml-[40px] sm:left-0 left-0"
+      ></canvas>
     </div>
   </div>
 
   <div class="bg-white text-red">
-  <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
     <div
       class="flex flex-col items-start md:items-center gap-y-4 justify-center w-11/12 sm:w-full max-w-5xl mx-auto sm:px-12"
     >
       <div class="font-mono flex flex-col gap-4">
-        <h1 class="text-4xl md:text-7xl md:text-center lg:text-8xl font-doto">WHAT IS THIS?</h1>
         <div class="max-w-3xl flex flex-col gap-4">
           <p>
-            BURST ✷ is a 4-hour pop-up gallery exhibition of creative technical
-            projects, run by{" "}<span
-              ><a
+            <span>
+              <a
                 href="https://purduehackers.com"
                 target="_blank"
                 class="underline underline-offset-4 hover:bg-red hover:text-white"
                 >Purdue Hackers</a
+              >
+            </span> is a collective of engineers & artists at Purdue who build creative
+            technical projects—apps, websites, games, hardware electronics.
+          </p>
+          <p>
+            For 2 years, hackers had been developing wacky, cutting-edge
+            projects at{" "}<span
+              ><a
+                href="https://events.purduehackers.com/hack-night-53"
+                target="_blank"
+                class="underline underline-offset-4 hover:bg-red hover:text-white"
+                >Hack&nbsp;Night</a
               ></span
-            >.
+            >, our all-night hacker festival every Friday—but none had been seen
+            by anyone outside Hack Night.
           </p>
           <p>
-            For 2 years, students in Purdue Hackers have been developing wacky,
-            cutting-edge projects at Hack Night, our all-night hacker festival
-            every Friday—but none have been seen by anyone outside Hack Night.
+            On Sunday, December 8th, 2024, we reimagined these projects as art
+            pieces, installed them in a real gallery in West Lafayette, Indiana,
+            and ran a 4-hour pop-up exhibition for the public.
           </p>
           <p>
-            On Sunday, December 8th, we’re installing these creations in the
-            Rueff Galleries on campus in a first-of-its-kind exhibition for the
-            broader campus community. They’ll only be up for 4 hours, then never
-            all in the same room again. Blink and you’ll miss it.
+            250 people stopped by, grabbed a{" "}<span
+              ><a
+                href="https://blog.purduehackers.com/posts/the-best-badge"
+                target="_blank"
+                class="underline underline-offset-4 hover:bg-red hover:text-white"
+                >badge</a
+              ></span
+            > and a mocktail, and viewed this student work, which included NFC-enabled
+            passports, a vine-based constructed language, and a meter-tall color
+            clock.
           </p>
         </div>
       </div>
     </div>
     <div class="w-full flex justify-center my-12 text-4xl">✷</div>
-    <h1 class="text-4xl md:text-7xl lg:text-8xl font-doto w-11/12 mx-auto sm:text-center">
+    <h1
+      class="text-4xl md:text-6xl lg:text-7xl font-doto w-11/12 mx-auto sm:text-center"
+    >
       FEATURED WORKS
     </h1>
     <div
-      class="grid md:grid-cols-2 grid-cols-1 gap-x-2 mt-8 md:w-11/12 lg:max-w-6xl mx-auto"
+      class="grid gap-x-2 mt-8 md:w-11/12 lg:max-w-6xl mx-auto gap-8 sm:gap-0"
     >
-      {projects.map((project) => <ProjectCard project={project} />)}
+      {recapProjects.map((project) => <ProjectCard project={project} />)}
     </div>
     <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+    <div class="w-full overflow-hidden">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-0">
+        {
+          recapImages.map((imageModule) => (
+            <div class="w-full h-full">
+              <Image
+                src={imageModule.default}
+                alt="BURST event photo"
+                width={800}
+                height={600}
+                class="w-full h-full object-cover block pointer-events-none select-none"
+                loading="lazy"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="w-full flex justify-center mt-6">
+      <a
+        href="https://drive.google.com/drive/folders/1G-i7CHLLMjMnGWK8lWlWlEmuW2TTFF-P?usp=sharing"
+        target="_blank"
+        class="font-mono underline underline-offset-4 hover:bg-red hover:text-white uppercase font-semibold hover:no-underline text-xl"
+        >View all photos</a
+      >
+    </div>
+    <div class="w-full flex justify-center my-12 text-4xl">✷</div>
+    <script src="/src/utils/star-canvas"></script>
   </div>
-  <script src="/src/utils/star-canvas"></script>
 </Layout>
