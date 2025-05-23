@@ -5,11 +5,11 @@ import { Image } from "astro:assets";
 import { recapProjects } from "~/utils/projects-data";
 import ProjectCard from "components/ProjectCard.astro";
 
-const recapImages = await Astro.glob('/recap-images/*.{jpg,png,jpeg}');
+const recapImages = await Astro.glob("/recap-images/*.{jpg,png,jpeg}");
 
 recapImages.sort((a, b) => {
-  const aName = a.default.src.split('/').pop();
-  const bName = b.default.src.split('/').pop();
+  const aName = a.default.src.split("/").pop();
+  const bName = b.default.src.split("/").pop();
   return aName.localeCompare(bName);
 });
 
@@ -57,9 +57,9 @@ export const prerender = true;
                 href="https://purduehackers.com"
                 target="_blank"
                 class="underline underline-offset-4 hover:bg-red hover:text-white"
-                >Purdue Hackers</a>
-            </span
-            > is a collective of engineers & artists at Purdue who build creative
+                >Purdue Hackers</a
+              >
+            </span> is a collective of engineers & artists at Purdue who build creative
             technical projects—apps, websites, games, hardware electronics.
           </p>
           <p>
@@ -100,28 +100,37 @@ export const prerender = true;
     >
       FEATURED WORKS
     </h1>
-    <div class="grid gap-x-2 mt-8 md:w-11/12 lg:max-w-6xl mx-auto gap-8 sm:gap-0">
+    <div
+      class="grid gap-x-2 mt-8 md:w-11/12 lg:max-w-6xl mx-auto gap-8 sm:gap-0"
+    >
       {recapProjects.map((project) => <ProjectCard project={project} />)}
     </div>
     <div class="w-full flex justify-center my-12 text-4xl">✷</div>
     <div class="w-full overflow-hidden">
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-0">
-        {recapImages.map((imageModule) => (
-          <div class="w-full h-full">
-            <Image
-              src={imageModule.default}
-              alt="BURST event photo"
-              width={800}
-              height={600}
-              class="w-full h-full object-cover block pointer-events-none select-none"
-              loading="lazy"
-            />
-          </div>
-        ))}
+        {
+          recapImages.map((imageModule) => (
+            <div class="w-full h-full">
+              <Image
+                src={imageModule.default}
+                alt="BURST event photo"
+                width={800}
+                height={600}
+                class="w-full h-full object-cover block pointer-events-none select-none"
+                loading="lazy"
+              />
+            </div>
+          ))
+        }
       </div>
     </div>
     <div class="w-full flex justify-center mt-6">
-      <a href="https://drive.google.com/drive/folders/1G-i7CHLLMjMnGWK8lWlWlEmuW2TTFF-P?usp=sharing" target="_blank" class="font-mono underline underline-offset-4 hover:bg-red hover:text-white uppercase font-semibold hover:no-underline text-xl">View all photos</a>
+      <a
+        href="https://drive.google.com/drive/folders/1G-i7CHLLMjMnGWK8lWlWlEmuW2TTFF-P?usp=sharing"
+        target="_blank"
+        class="font-mono underline underline-offset-4 hover:bg-red hover:text-white uppercase font-semibold hover:no-underline text-xl"
+        >View all photos</a
+      >
     </div>
     <div class="w-full flex justify-center my-12 text-4xl">✷</div>
     <script src="/src/utils/star-canvas"></script>
