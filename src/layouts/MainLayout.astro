@@ -8,6 +8,7 @@ import { Head } from "astro-capo";
 import { SEO } from "astro-seo";
 
 const { title, description, og, twitter } = Astro.props;
+const canonical = new URL(Astro.url.pathname, 'https://burst.purduehackers.com').href;
 
 export interface Props {
   title: string;
@@ -52,12 +53,13 @@ export interface Props {
     <SEO
       title={title}
       description={description}
-      canonical="https://burst.purduehackers.com"
+      canonical={canonical}
       openGraph={{
         basic: {
           type: "website",
           title: og && og.title ? og.title : title,
-          image: `/opengraph.png`,
+          image: 'https://burst.purduehackers.com/opengraph.png',
+          url: canonical,
         },
         optional: {
           description: og && og.description ? og.description : description,
@@ -74,7 +76,7 @@ export interface Props {
         title: twitter && twitter.title ? twitter.title : title,
         description:
           twitter && twitter.description ? twitter.description : description,
-        image: `/opengraph.png`,
+        image: 'https://burst.purduehackers.com/opengraph.png',
         // TODO: add alt text
         // imageAlt: "",
         card: "summary_large_image",
@@ -94,7 +96,7 @@ export interface Props {
   <body
     class="flex flex-col bg-red text-white w-full max-w-full min-h-screen overflow-x-clip"
   >
-    <slot />
+    <main class="w-full overflow-x-clip"><slot /></main>
     <Analytics />
   </body>
 </html>
