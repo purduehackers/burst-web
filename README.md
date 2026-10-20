@@ -11,3 +11,14 @@ On Sunday, December 8th, we’re installing these creations in the Rueff Galleri
 ---
 
 This is the landing page for the event.
+
+## Development
+
+Use Node.js 22 and Bun. Run `bun install --frozen-lockfile`, then
+`bun run dev` or `bun run build`.
+
+The Astro 4 Vercel adapter only recognizes Node.js 18 and 20. The checked-in
+Bun patch adds Node.js 22 to its runtime list, matching `engines.node` in
+`package.json`, so Vercel does not receive an unsupported Node.js 18 function.
+Keep the patch until upgrading Astro and its adapter together to a version
+that supports Node.js 22.

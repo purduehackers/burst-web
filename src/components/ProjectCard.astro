@@ -1,9 +1,11 @@
 ---
 import { Image } from "astro:assets";
 const { project } = Astro.props;
+const id = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 ---
 
 <section
+  id={id}
   class="h-full p-4 md:p-8 grid md:grid-cols-[2fr_1fr] gap-2 md:gap-12 items-start"
 >
   {
@@ -12,7 +14,7 @@ const { project } = Astro.props;
         width={250}
         height={187}
         src={project.photo}
-        alt={project.photo}
+        alt={`${project.title} by ${project.creator}, exhibited at BURST`}
         class="w-full"
         loading="lazy"
       />
@@ -21,18 +23,29 @@ const { project } = Astro.props;
     )
   }
   <div class="flex flex-col justify-start items-start">
-    <h2 class="text-3xl sm:text-4xl font-mono font-semibold">
-      {project.title}
-    </h2>
+    <h3 class="text-3xl sm:text-4xl font-mono font-semibold">
+      <a href={`#${id}`}>{project.title}</a>
+    </h3>
     <p class="text-base sm:text-lg uppercase font-light">{project.creator}</p>
     ⇥
     <p class="text-sm sm:text-base font-mono font-light my-4 text-balance">
       {project.description}
     </p>
-    <a
-      class="underline underline-offset-4 hover:bg-red hover:text-white uppercase text-base font-semibold hover:no-underline"
-      href={project.ctaLink || "#"}
-      target="_blank">{project.cta}</a
-    >
+    {project.ctaLink && project.cta && (
+      <a
+        class="underline underline-offset-4 hover:bg-red hover:text-white uppercase text-base font-semibold hover:no-underline"
+        href={project.ctaLink}
+        target="_blank" rel="noopener noreferrer">{project.cta}</a>
+    )}
+    {project.title === 'Door Opener' && (
+      <a class="underline underline-offset-4 mt-3" href="https://blog.purduehackers.com/posts/door-opener-2">
+        Door Opener redesign ↗
+      </a>
+    )}
+    {project.title === 'The Sign' && (
+      <a class="underline underline-offset-4 mt-3" href="https://www.jackhogan.me/blog/from-tiny-seed-to-towering-sequoia">
+        Creator’s write-up ↗
+      </a>
+    )}
   </div>
 </section>
